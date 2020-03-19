@@ -1,17 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import {ChannelsService} from '../../services/channels.service';
+import {
+  AfterContentInit,
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  HostListener,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
+import { ChannelsService } from '../../services/channels.service';
+import { Observable } from 'rxjs';
+import { Channel } from '../../interfaces/channel';
 
 @Component({
   selector: 'app-channels',
   templateUrl: './channels.component.html',
-  styleUrls: ['./channels.component.css']
+  styleUrls: ['./channels.component.scss'],
 })
 export class ChannelsComponent implements OnInit {
-
-  constructor(private readonly _channelsService: ChannelsService) { }
+  channels$: Observable<Channel[]>;
+  constructor(private readonly _channelsService: ChannelsService) {}
 
   ngOnInit(): void {
-    this._channelsService.getAvailableHighestQualityChannels().subscribe(console.log);
+    this.channels$ = this._channelsService.getAvailableHighestQualityChannels();
   }
-
 }

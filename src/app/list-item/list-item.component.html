@@ -1,17 +1,9 @@
 <div class="list-item container">
-    <span class="channel-number">015</span>
+    <span class="channel-number">{{(index + 1) | number:'3.0'}}</span>
     <div class="image-container">
-      <img src="https://logos.zattic.com/logos/54a6ea6b3836821f9eab/black/84x48.png" class="image">
+      <img src="https://logos.zattic.com/logos/{{channel.highestQuality.logo_token}}/black/84x48.png" class="image">
     </div>
-    <span class="channel-title">Channel 5 HD</span>
-</div>
-
-<div class="list-item container">
-    <span class="channel-number">002</span>
-    <div class="image-container">
-      <img src="https://logos.zattic.com/logos/c4716c3199b59b86f66f/black/84x48.png" class="image">
-    </div>
-    <span class="channel-title">frisbee</span>
+    <span class="channel-title">{{channel.title}}</span>
 </div>
 
 
