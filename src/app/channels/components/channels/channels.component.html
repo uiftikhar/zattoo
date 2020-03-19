@@ -1,3 +1,7 @@
-<div class="parent-container">
-  <app-list-item *ngFor="let channel of (channels$ | async); let index = index " [channel]="channel"  [index]="index"></app-list-item>
-</div>
+<app-list-item-wrapper>
+  <app-list-item
+    *ngFor="let channel of (channels$ | async); let index = index"
+    [channel]="channel"
+    [index]="index"
+  ></app-list-item>
+</app-list-item-wrapper>
