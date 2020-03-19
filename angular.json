@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "zattoo"
+  "defaultProject": "zattoo",
+  "cli": {
+    "analytics": false
+  }
 }
