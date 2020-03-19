@@ -23,9 +23,7 @@ export class ListItemComponent implements FocusableOption, OnInit {
   constructor(private _elementRef: ElementRef) {}
 
   ngOnInit(): void {
-    if (this.index === 0) {
-      this.focus();
-    }
+
   }
 
   focus() {

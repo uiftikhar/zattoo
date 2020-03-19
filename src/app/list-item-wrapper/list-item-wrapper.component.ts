@@ -16,7 +16,7 @@ import { ListItemComponent } from '../list-item/list-item.component';
   styleUrls: ['./list-item-wrapper.component.scss'],
 })
 export class ListItemWrapperComponent
-  implements AfterContentInit, AfterViewInit {
+  implements AfterContentInit {
   @ContentChild(ListItemComponent) item: ListItemComponent;
   @ViewChild(ListItemComponent) item1: ListItemComponent;
   @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent>;
@@ -24,18 +24,15 @@ export class ListItemWrapperComponent
 
   @HostListener('keydown', ['$event'])
   manage(event) {
-    console.log(event);
     this.keyManager.onKeydown(event);
+    this.keyManager.setNextItemActive();
   }
 
   ngAfterContentInit(): void {
     this.keyManager = new FocusKeyManager(this.items).withWrap();
-    console.log(this.item,this.item1);
-  }
-
-  ngAfterViewInit(): void {
     setTimeout(() => {
+      // this.items.forEach(ins => console.log(ins));
       this.keyManager.setFirstItemActive();
-    });
+    }, 100);
   }
 }
