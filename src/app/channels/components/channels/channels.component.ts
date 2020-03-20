@@ -2,7 +2,7 @@ import {
   AfterContentInit,
   AfterViewChecked,
   AfterViewInit,
-  Component,
+  Component, ContentChildren,
   HostListener,
   OnInit,
   QueryList,
@@ -19,12 +19,17 @@ import { FocusKeyManager } from '@angular/cdk/a11y';
   templateUrl: './channels.component.html',
   styleUrls: ['./channels.component.scss'],
 })
-export class ChannelsComponent implements OnInit {
+export class ChannelsComponent implements OnInit, AfterViewInit {
   channels$: Observable<Channel[]>;
   favorites: Channel[];
-
+  @ViewChildren(ListItemComponent) _items: QueryList<ListItemComponent>;
+  items: QueryList<ListItemComponent>;
   constructor(private readonly _channelsService: ChannelsService) {}
 
+
+  ngAfterViewInit() {
+    this.items = this._items;
+  }
   ngOnInit(): void {
     this.channels$ = this._channelsService.getAvailableHighestQualityChannels();
     this._channelsService.getAvailableHighestQualityChannels().subscribe(res => {

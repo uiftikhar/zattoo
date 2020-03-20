@@ -4,10 +4,13 @@ import {
   Component,
   ContentChild,
   ContentChildren,
+  ElementRef,
   HostListener,
+  Input,
   OnDestroy,
   QueryList,
   ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import { FocusableOption, FocusKeyManager } from '@angular/cdk/a11y';
 import { ListItemComponent } from '../list-item/list-item.component';
@@ -40,7 +43,9 @@ export class ListItemWrapperComponent implements AfterContentInit, OnDestroy {
       (event: KeyboardEvent) => {
         const currentKey = this.keyManager.activeItemIndex;
         if (event.key === 'ArrowDown') {
-          this.keyManager.setNextItemActive();
+            this.keyManager.setNextItemActive();
+            // this.keyManager.setNextItemActive();
+            // this.keyManager.setNextItemActive();
           // const nextKey = currentKey + 2;
           // this.keyManager.setActiveItem(nextKey);
         }
@@ -52,11 +57,11 @@ export class ListItemWrapperComponent implements AfterContentInit, OnDestroy {
         }
 
         if (event.key === 'ArrowRight') {
-            this.keyManager.setNextItemActive();
+          this.keyManager.setNextItemActive();
         }
 
         if (event.key === 'ArrowLeft') {
-            this.keyManager.setPreviousItemActive();
+          this.keyManager.setPreviousItemActive();
         }
       },
     );
@@ -64,9 +69,9 @@ export class ListItemWrapperComponent implements AfterContentInit, OnDestroy {
 
   ngAfterContentInit(): void {
     this.keyManager = new FocusKeyManager(this.items).withWrap();
+    // this.keyManager2 = new FocusKeyManager(this.divs).withWrap();
     setTimeout(() => {
       this.keyManager.setFirstItemActive();
-      console.log(this.items)
     }, 100);
   }
 }

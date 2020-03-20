@@ -8,9 +8,10 @@ import {ChannelsService} from './channels/services/channels.service';
 import {HttpClientModule} from '@angular/common/http';
 import { ListItemWrapperComponent } from './list-item-wrapper/list-item-wrapper.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { ClassDirective } from './channels/directives/class.directive';
 
 @NgModule({
-  declarations: [AppComponent, ListItemComponent, ChannelsComponent, ListItemWrapperComponent, FavoritesComponent],
+  declarations: [AppComponent, ListItemComponent, ChannelsComponent, ListItemWrapperComponent, FavoritesComponent, ClassDirective],
   imports: [BrowserModule, HttpClientModule],
   // TODO: move this into its own module ?
   providers: [ChannelsService],

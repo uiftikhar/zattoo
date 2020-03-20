@@ -21,6 +21,7 @@ import { FocusableOption } from '@angular/cdk/a11y';
 export class ListItemComponent implements FocusableOption {
   @Input() channel: Channel;
   @Input() index: number;
+  @Input() favorite = false;
   constructor(private readonly _elementRef: ElementRef) {}
 
   focus() {
