@@ -80,6 +80,6 @@ export class ListItemWrapperComponent implements AfterContentInit, OnDestroy {
       this.keyManager = new FocusKeyManager(this.items).withWrap();
       console.log(this.fav, this.channels.first.items);
       this.keyManager.setFirstItemActive();
-    }, 150);
+    }, 500);
   }
 }

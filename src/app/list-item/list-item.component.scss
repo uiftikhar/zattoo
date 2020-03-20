@@ -8,6 +8,11 @@
   grid-row-gap: 0px;
 }
 
+.abcdef {
+  grid-template-columns: 0;
+  grid-auto-flow: column;
+}
+
 
 :host(:focus) {
   outline: 0.1rem solid rgba(255, 255, 255, 0.8);

@@ -27,5 +27,6 @@ export class ListItemComponent implements FocusableOption {
   focus() {
     console.log(13);
     this._elementRef.nativeElement.focus();
+    console.log(this.favorite);
   }
 }
