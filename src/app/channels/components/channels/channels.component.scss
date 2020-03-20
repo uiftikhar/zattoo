@@ -1,27 +1,8 @@
-.wrapper {
-  pointer-events: none;
-  display: flex;
-}
-
-.container {
+:host {
     height: 750px;
     overflow: hidden;
     display: grid;
     grid-template-columns: [channel-1]369px [channel-2]369px;
     grid-template-rows: repeat(9, minmax(72px,auto));
     grid-auto-flow: row;
-}
-
-.favorites-container {
-  grid-template-columns: 0;
-  grid-auto-flow: column;
-}
-
-.abc {
-  grid-column: favorite;
-  grid-auto-flow: column;
-}
-
-.def {
-  grid-column: channel-1/channel-2;
 }

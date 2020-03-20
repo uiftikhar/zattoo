@@ -1,3 +1,14 @@
+:host {
+  height: 72px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 369px 369px;
+  grid-template-rows: 72px 72px;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+
 :host(:focus) {
   outline: 0.1rem solid rgba(255, 255, 255, 0.8);
   background-color: #383838;

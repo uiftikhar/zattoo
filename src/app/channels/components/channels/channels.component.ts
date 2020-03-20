@@ -34,6 +34,7 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
     this.channels$ = this._channelsService.getAvailableHighestQualityChannels();
     this._channelsService.getAvailableHighestQualityChannels().subscribe(res => {
       this.favorites = res.filter((_, index) => index < 10);
+      console.log(this.favorites);
     });
   }
 }

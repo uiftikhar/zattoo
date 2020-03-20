@@ -25,6 +25,7 @@ export class ListItemComponent implements FocusableOption {
   constructor(private readonly _elementRef: ElementRef) {}
 
   focus() {
+    console.log(13);
     this._elementRef.nativeElement.focus();
   }
 }

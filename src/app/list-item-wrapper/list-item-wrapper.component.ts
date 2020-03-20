@@ -17,6 +17,8 @@ import { ListItemComponent } from '../list-item/list-item.component';
 import { fromEvent, Subscription, zip } from 'rxjs';
 import { merge, mergeMap } from 'rxjs/operators';
 import { flatten } from '@angular/compiler';
+import {FavoritesComponent} from '../favorites/favorites.component';
+import {ChannelsComponent} from '../channels/components/channels/channels.component';
 
 @Component({
   selector: 'app-list-item-wrapper',
@@ -25,6 +27,8 @@ import { flatten } from '@angular/compiler';
   styleUrls: ['./list-item-wrapper.component.scss'],
 })
 export class ListItemWrapperComponent implements AfterContentInit, OnDestroy {
+  @ContentChildren(FavoritesComponent) fav: QueryList<FavoritesComponent>;
+  @ContentChildren(ChannelsComponent) channels: QueryList<ChannelsComponent>;
   @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent>;
 
   private subscription: Subscription;
@@ -68,10 +72,14 @@ export class ListItemWrapperComponent implements AfterContentInit, OnDestroy {
   }
 
   ngAfterContentInit(): void {
-    this.keyManager = new FocusKeyManager(this.items).withWrap();
     // this.keyManager2 = new FocusKeyManager(this.divs).withWrap();
     setTimeout(() => {
+      this.items.reset([...this.channels.first.items.toArray(), ...this.fav.first.items.toArray()]);
+      console.log(1, this.items);
+      console.log(2, this.channels, this.fav);
+      this.keyManager = new FocusKeyManager(this.items).withWrap();
+      console.log(this.fav, this.channels.first.items);
       this.keyManager.setFirstItemActive();
-    }, 100);
+    }, 150);
   }
 }
