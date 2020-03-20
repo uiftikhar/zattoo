@@ -17,8 +17,8 @@ import { ListItemComponent } from '../list-item/list-item.component';
 import { fromEvent, Subscription, zip } from 'rxjs';
 import { merge, mergeMap } from 'rxjs/operators';
 import { flatten } from '@angular/compiler';
-import {FavoritesComponent} from '../favorites/favorites.component';
-import {ChannelsComponent} from '../channels/components/channels/channels.component';
+import { FavoritesComponent } from '../favorites/favorites.component';
+import { ChannelsComponent } from '../channels/components/channels/channels.component';
 
 @Component({
   selector: 'app-list-item-wrapper',
@@ -47,25 +47,45 @@ export class ListItemWrapperComponent implements AfterContentInit, OnDestroy {
       (event: KeyboardEvent) => {
         const currentKey = this.keyManager.activeItemIndex;
         if (event.key === 'ArrowDown') {
+          if (this.keyManager.activeItem.favorite) {
             this.keyManager.setNextItemActive();
-            // this.keyManager.setNextItemActive();
-            // this.keyManager.setNextItemActive();
+          } else {
+            this.keyManager.setNextItemActive();
+            this.keyManager.setNextItemActive();
+          }
+          // this.keyManager.setNextItemActive();
+          // this.keyManager.setNextItemActive();
+          // this.keyManager.setNextItemActive();
           // const nextKey = currentKey + 2;
           // this.keyManager.setActiveItem(nextKey);
         }
 
         if (event.key === 'ArrowUp') {
-          this.keyManager.setPreviousItemActive();
+          console.log(this.keyManager.activeItem.favorite);
+          if (this.keyManager.activeItem.favorite) {
+            this.keyManager.setPreviousItemActive();
+          } else {
+            this.keyManager.setPreviousItemActive();
+            this.keyManager.setPreviousItemActive();
+          }
           // const prevKey = currentKey - 2;
           // this.keyManager.setActiveItem(prevKey);
         }
 
         if (event.key === 'ArrowRight') {
-          this.keyManager.setNextItemActive();
+          if (!this.keyManager.activeItem.favorite) {
+            if (this.keyManager.activeItemIndex % 2 === 0) {
+              this.keyManager.setNextItemActive();
+            }
+          }
         }
 
         if (event.key === 'ArrowLeft') {
-          this.keyManager.setPreviousItemActive();
+          if (!this.keyManager.activeItem.favorite) {
+            if (this.keyManager.activeItemIndex % 2 !== 0) {
+              this.keyManager.setPreviousItemActive();
+            }
+          }
         }
       },
     );
@@ -74,7 +94,10 @@ export class ListItemWrapperComponent implements AfterContentInit, OnDestroy {
   ngAfterContentInit(): void {
     // this.keyManager2 = new FocusKeyManager(this.divs).withWrap();
     setTimeout(() => {
-      this.items.reset([...this.channels.first.items.toArray(), ...this.fav.first.items.toArray()]);
+      this.items.reset([
+        ...this.channels.first.items.toArray(),
+        ...this.fav.first.items.toArray(),
+      ]);
       console.log(1, this.items);
       console.log(2, this.channels, this.fav);
       this.keyManager = new FocusKeyManager(this.items).withWrap();
