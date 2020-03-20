@@ -1,4 +1,4 @@
-:host {
+.wrapper {
   pointer-events: none;
   display: flex;
 }
@@ -7,15 +7,22 @@
     height: 750px;
     overflow: hidden;
     display: grid;
-    grid-template-columns: 369px 369px;
-    grid-template-rows: 72px;
+    grid-template-columns: [channel-1]369px [channel-2]369px;
+    grid-template-rows: repeat(9, minmax(72px,auto));
 }
 
 .favorites-container {
   height: 750px;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 369px;
-  grid-template-rows: 72px;
+  grid-template-columns: [favorite]369px;
 }
 
+.abc {
+  grid-column: favorite;
+  grid-auto-flow: column;
+}
+
+.def {
+  grid-column: channel-1/channel-2;
+}

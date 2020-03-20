@@ -22,9 +22,8 @@ import { flatten } from '@angular/compiler';
   styleUrls: ['./list-item-wrapper.component.scss'],
 })
 export class ListItemWrapperComponent implements AfterContentInit, OnDestroy {
-  @ContentChild(ListItemComponent) item: ListItemComponent;
-  @ViewChild(ListItemComponent) item1: ListItemComponent;
   @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent>;
+
   private subscription: Subscription;
   private keyManager: FocusKeyManager<ListItemComponent>;
 
@@ -67,6 +66,7 @@ export class ListItemWrapperComponent implements AfterContentInit, OnDestroy {
     this.keyManager = new FocusKeyManager(this.items).withWrap();
     setTimeout(() => {
       this.keyManager.setFirstItemActive();
+      console.log(this.items)
     }, 100);
   }
 }
