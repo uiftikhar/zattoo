@@ -2,8 +2,10 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
 } from '@angular/core';
 import { Channel } from '../channels/interfaces/channel';
 import { FocusableOption } from '@angular/cdk/a11y';
@@ -16,15 +18,10 @@ import { FocusableOption } from '@angular/cdk/a11y';
     tabindex: '-1',
   },
 })
-export class ListItemComponent implements FocusableOption, OnInit {
+export class ListItemComponent implements FocusableOption {
   @Input() channel: Channel;
   @Input() index: number;
-
-  constructor(private _elementRef: ElementRef) {}
-
-  ngOnInit(): void {
-
-  }
+  constructor(private readonly _elementRef: ElementRef) {}
 
   focus() {
     this._elementRef.nativeElement.focus();

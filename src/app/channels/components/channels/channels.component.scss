@@ -1,3 +1,21 @@
 :host {
   pointer-events: none;
+  display: flex;
 }
+
+.container {
+    height: 750px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 369px 369px;
+    grid-template-rows: 72px;
+}
+
+.favorites-container {
+  height: 750px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 369px;
+  grid-template-rows: 72px;
+}
+

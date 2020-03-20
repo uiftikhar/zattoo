@@ -21,10 +21,14 @@ import { FocusKeyManager } from '@angular/cdk/a11y';
 })
 export class ChannelsComponent implements OnInit {
   channels$: Observable<Channel[]>;
+  favorites: Channel[];
 
   constructor(private readonly _channelsService: ChannelsService) {}
 
   ngOnInit(): void {
     this.channels$ = this._channelsService.getAvailableHighestQualityChannels();
+    this._channelsService.getAvailableHighestQualityChannels().subscribe(res => {
+      this.favorites = res.filter((_, index) => index < 10);
+    });
   }
 }

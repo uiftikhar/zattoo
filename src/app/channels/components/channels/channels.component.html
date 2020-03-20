@@ -1,4 +1,12 @@
-<app-list-item-wrapper >
+<app-list-item-wrapper class="favorites-container">
+  <app-list-item
+    class=""
+    *ngFor="let channel of favorites; let index = index"
+    [channel]="channel"
+    [index]="index"
+  ></app-list-item>
+</app-list-item-wrapper>
+<app-list-item-wrapper class="container">
   <app-list-item
     *ngFor="let channel of (channels$ | async); let index = index"
     [channel]="channel"
