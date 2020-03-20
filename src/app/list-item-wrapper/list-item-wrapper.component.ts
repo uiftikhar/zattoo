@@ -50,18 +50,15 @@ export class ListItemWrapperComponent implements AfterContentInit, OnDestroy {
           if (this.keyManager.activeItem.favorite) {
             this.keyManager.setNextItemActive();
           } else {
-            this.keyManager.setNextItemActive();
-            this.keyManager.setNextItemActive();
+            const nextKey = currentKey + 2;
+            this.keyManager.setActiveItem(nextKey);
           }
           // this.keyManager.setNextItemActive();
           // this.keyManager.setNextItemActive();
           // this.keyManager.setNextItemActive();
-          // const nextKey = currentKey + 2;
-          // this.keyManager.setActiveItem(nextKey);
         }
 
         if (event.key === 'ArrowUp') {
-          console.log(this.keyManager.activeItem.favorite);
           if (this.keyManager.activeItem.favorite) {
             this.keyManager.setPreviousItemActive();
           } else {
@@ -77,6 +74,37 @@ export class ListItemWrapperComponent implements AfterContentInit, OnDestroy {
             if (this.keyManager.activeItemIndex % 2 === 0) {
               this.keyManager.setNextItemActive();
             }
+          } else {
+            if (this.keyManager.activeItemIndex === 217) {
+              this.keyManager.setActiveItem(0);
+            }
+            if (this.keyManager.activeItemIndex === 218) {
+              this.keyManager.setActiveItem(2);
+            }
+            if (this.keyManager.activeItemIndex === 219) {
+              this.keyManager.setActiveItem(4);
+            }
+            if (this.keyManager.activeItemIndex === 220) {
+              this.keyManager.setActiveItem(6);
+            }
+            if (this.keyManager.activeItemIndex === 221) {
+              this.keyManager.setActiveItem(8);
+            }
+            if (this.keyManager.activeItemIndex === 222) {
+              this.keyManager.setActiveItem(10);
+            }
+            if (this.keyManager.activeItemIndex === 223) {
+              this.keyManager.setActiveItem(12);
+            }
+            if (this.keyManager.activeItemIndex === 224) {
+              this.keyManager.setActiveItem(14);
+            }
+            if (this.keyManager.activeItemIndex === 225) {
+              this.keyManager.setActiveItem(16);
+            }
+            if (this.keyManager.activeItemIndex === 226) {
+              this.keyManager.setActiveItem(18);
+            }
           }
         }
 
@@ -84,6 +112,37 @@ export class ListItemWrapperComponent implements AfterContentInit, OnDestroy {
           if (!this.keyManager.activeItem.favorite) {
             if (this.keyManager.activeItemIndex % 2 !== 0) {
               this.keyManager.setPreviousItemActive();
+            } else {
+              if (this.keyManager.activeItemIndex === 0) {
+                this.keyManager.setActiveItem(217);
+              }
+              if (this.keyManager.activeItemIndex === 2) {
+                this.keyManager.setActiveItem(218);
+              }
+              if (this.keyManager.activeItemIndex === 4) {
+                this.keyManager.setActiveItem(219);
+              }
+              if (this.keyManager.activeItemIndex === 6) {
+                this.keyManager.setActiveItem(220);
+              }
+              if (this.keyManager.activeItemIndex === 8) {
+                this.keyManager.setActiveItem(221);
+              }
+              if (this.keyManager.activeItemIndex === 10) {
+                this.keyManager.setActiveItem(222);
+              }
+              if (this.keyManager.activeItemIndex === 12) {
+                this.keyManager.setActiveItem(223);
+              }
+              if (this.keyManager.activeItemIndex === 14) {
+                this.keyManager.setActiveItem(224);
+              }
+              if (this.keyManager.activeItemIndex === 16) {
+                this.keyManager.setActiveItem(225);
+              }
+              if (this.keyManager.activeItemIndex === 18) {
+                this.keyManager.setActiveItem(226);
+              }
             }
           }
         }
@@ -98,10 +157,7 @@ export class ListItemWrapperComponent implements AfterContentInit, OnDestroy {
         ...this.channels.first.items.toArray(),
         ...this.fav.first.items.toArray(),
       ]);
-      console.log(1, this.items);
-      console.log(2, this.channels, this.fav);
       this.keyManager = new FocusKeyManager(this.items).withWrap();
-      console.log(this.fav, this.channels.first.items);
       this.keyManager.setFirstItemActive();
     }, 500);
   }
