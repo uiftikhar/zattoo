@@ -1,4 +1,18 @@
 .abc{
-  display: flex;
-
+  height: 650px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: [channel-1]369px [channel-2]369px;
+  grid-template-rows: repeat(9, minmax(72px,auto));
+  grid-auto-flow: row;
 }
+
+.cde {
+  height: 655px;
+  grid-auto-flow: column;
+}
+
+.wrapper {
+  display: flex;
+}
+

@@ -27,7 +27,8 @@ export class ListItemComponent implements FocusableOption, AfterViewInit {
   private scrollContainer: any;
 
   ngAfterViewInit() {
-    this.scrollContainer = this.scrollFrame;
+    // this.scrollContainer = this.scrollFrame;
+    // console.log(this.scrollContainer.scroll());
     // console.log(this.scrollContainer.scroll());
   }
 

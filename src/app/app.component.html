@@ -1,4 +1,25 @@
-<app-list-item-wrapper class="abc">
-  <app-favorites style="margin-right: 20px"></app-favorites>
-  <app-channels></app-channels>
-</app-list-item-wrapper>
+<!--<app-list-item-wrapper class="abc">-->
+  <!--<app-favorites style="margin-right: 20px"></app-favorites>-->
+  <!--<app-channels></app-channels>-->
+<!--</app-list-item-wrapper>-->
+
+<div class="wrapper" appKeyboardNav>
+  <div class="cde">
+    <app-list-item
+      [favorite]="true"
+      appKeyboardNavItem="{{true}}"
+      *ngFor="let channel of favorites; let index = index"
+      [channel]="channel"
+      [index]="index"
+      #item
+    ></app-list-item>
+  </div>
+  <div class="abc">
+    <app-list-item
+      appKeyboardNavItem
+      *ngFor="let channel of (channels$ | async); let index = index"
+      [channel]="channel"
+      [index]="index"
+    ></app-list-item>
+  </div>
+</div>

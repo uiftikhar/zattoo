@@ -9,9 +9,11 @@ import {HttpClientModule} from '@angular/common/http';
 import { ListItemWrapperComponent } from './list-item-wrapper/list-item-wrapper.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { ClassDirective } from './channels/directives/class.directive';
+import { KeyboardNavDirective } from './channels/directive/keyboard-nav.directive';
+import { KeyboardNavItemDirective } from './channels/directive/keyboard-nav-item.directive';
 
 @NgModule({
-  declarations: [AppComponent, ListItemComponent, ChannelsComponent, ListItemWrapperComponent, FavoritesComponent, ClassDirective],
+  declarations: [AppComponent, ListItemComponent, ChannelsComponent, ListItemWrapperComponent, FavoritesComponent, ClassDirective, KeyboardNavDirective, KeyboardNavItemDirective],
   imports: [BrowserModule, HttpClientModule],
   // TODO: move this into its own module ?
   providers: [ChannelsService],
