@@ -1,4 +1,4 @@
-<div class="list-item container" [ngClass]="{'abcdef': favorite}">
+<div class="list-item container" [ngClass]="{'abcdef': favorite}" #scrollframe>
     <span *ngIf="favorite">F</span>
     <span class="channel-number" *ngIf="!favorite">{{(index + 1) | number:'3.0'}}</span>
     <div class="image-container">

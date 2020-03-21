@@ -4,7 +4,7 @@ import {
   Component,
   ContentChild,
   ContentChildren,
-  ElementRef,
+  ElementRef, HostBinding,
   HostListener,
   Input,
   OnDestroy,
@@ -23,14 +23,14 @@ import { ChannelsComponent } from '../channels/components/channels/channels.comp
 @Component({
   selector: 'app-list-item-wrapper',
   template: '<ng-content></ng-content>',
-  host: { tabindex: '0' },
+  host: { tabindex: '0', '[class.className]': 'isFixed' },
   styleUrls: ['./list-item-wrapper.component.scss'],
 })
 export class ListItemWrapperComponent implements AfterContentInit, OnDestroy {
   @ContentChildren(FavoritesComponent) fav: QueryList<FavoritesComponent>;
   @ContentChildren(ChannelsComponent) channels: QueryList<ChannelsComponent>;
   @ContentChildren(ListItemComponent) items: QueryList<ListItemComponent>;
-
+  @HostBinding('class.isFixed') isFixed = false;
   private subscription: Subscription;
   private keyManager: FocusKeyManager<ListItemComponent>;
 
@@ -42,10 +42,22 @@ export class ListItemWrapperComponent implements AfterContentInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    console.log('scroll');
+  }
+
+
   onKeyPress() {
     this.subscription = fromEvent(document, 'keydown').subscribe(
       (event: KeyboardEvent) => {
         const currentKey = this.keyManager.activeItemIndex;
+        /*
+        const elem = this.keyManager.activeItem._elementRef.nativeElement;
+        if (elem.offsetTop >= 224) {
+          console.log(123, elem);
+          this.isFixed = true;
+        }*/
         if (event.key === 'ArrowDown') {
           if (this.keyManager.activeItem.favorite) {
             this.keyManager.setNextItemActive();

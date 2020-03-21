@@ -1,0 +1,13 @@
+:host {
+  background-color: blue;
+  //overflow: hidden;
+  //position: relative;
+  &.isFixed {
+    background-color: red;
+    position: absolute;
+  }
+}
+
+.isFixed {
+  background-color: purple;
+}
