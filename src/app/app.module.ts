@@ -7,7 +7,6 @@ import { ChannelsComponent } from './channels/components/channels/channels.compo
 import { ChannelsService } from './channels/services/channels.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FavoritesComponent } from './favorites/favorites.component';
-import { ClassDirective } from './channels/directives/class.directive';
 import { KeyboardNavDirective } from './channels/directive/keyboard-nav.directive';
 import { KeyboardNavItemDirective } from './channels/directive/keyboard-nav-item.directive';
 
@@ -17,7 +16,6 @@ import { KeyboardNavItemDirective } from './channels/directive/keyboard-nav-item
     ListItemComponent,
     ChannelsComponent,
     FavoritesComponent,
-    ClassDirective,
     KeyboardNavDirective,
     KeyboardNavItemDirective,
   ],
