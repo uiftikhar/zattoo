@@ -6,6 +6,8 @@ import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 export class KeyboardNavItemDirective {
 
   @Input() favorite: boolean = false;
+  @Input() isLast: boolean = false;
+  @Input() dirIndex: number = 0;
 
   constructor(private elementRef: ElementRef) {
     // console.log(this.element);

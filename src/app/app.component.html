@@ -7,18 +7,20 @@
   <div class="cde">
     <app-list-item
       [favorite]="true"
+      *ngFor="let channel of favorites; let index = index; last as isLast"
       appKeyboardNavItem="{{true}}"
-      *ngFor="let channel of favorites; let index = index"
+      [isLast]="isLast"
       [channel]="channel"
       [index]="index"
-      #item
     ></app-list-item>
   </div>
   <div class="abc">
     <app-list-item
+      #item
       appKeyboardNavItem
       *ngFor="let channel of (channels$ | async); let index = index"
       [channel]="channel"
+      [dirIndex]="index"
       [index]="index"
     ></app-list-item>
   </div>
