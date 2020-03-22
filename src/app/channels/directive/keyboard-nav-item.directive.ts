@@ -8,6 +8,7 @@ export class KeyboardNavItemDirective {
   @Input() favorite: boolean = false;
   @Input() isLast: boolean = false;
   @Input() dirIndex: number = 0;
+  @Input() favLength: number = 0;
 
   constructor(private elementRef: ElementRef) {
     // console.log(this.element);
@@ -17,4 +18,5 @@ export class KeyboardNavItemDirective {
    * Host native element.
    */
   public element: HTMLElement = this.elementRef.nativeElement;
+
 }

@@ -3,6 +3,7 @@ import {
   Directive,
   HostListener,
   QueryList,
+  Renderer2,
 } from '@angular/core';
 import { KeyboardNavItemDirective } from './keyboard-nav-item.directive';
 
@@ -12,6 +13,8 @@ import { KeyboardNavItemDirective } from './keyboard-nav-item.directive';
   selector: '[appKeyboardNav]',
 })
 export class KeyboardNavDirective {
+  constructor(private _renderer: Renderer2) {}
+
   /**
    * Keyboard nav items.
    */
@@ -23,10 +26,9 @@ export class KeyboardNavDirective {
    *
    * @param event Keyboard event.
    */
-  // @HostListener('keydown.ArrowUp', ['$event'])
-  // @HostListener('keydown.ArrowUp', ['$event'])
+  @HostListener('keydown.ArrowRight', ['$event'])
   @HostListener('keydown.ArrowDown', ['$event'])
-  // @HostListener('keydown.ArrowLeft', ['$event'])
+  @HostListener('keydown.ArrowLeft', ['$event'])
   private nav(event: KeyboardEvent): void {
     event.stopPropagation();
     event.preventDefault();
@@ -37,22 +39,7 @@ export class KeyboardNavDirective {
 
     const items: KeyboardNavItemDirective[] = this.items.toArray() as KeyboardNavItemDirective[];
 
-    let step: number = 0;
-    switch (event.code) {
-      case 'ArrowDown':
-        step = 1;
-        break;
-      case 'ArrowUp':
-        step = -1;
-        break;
-      case 'ArrowRight':
-        step = 10;
-        break;
-      case 'ArrowLeft':
-        step = -10;
-        break;
-    }
-    let active: number;
+    let active: number = 0;
     let i: number = this.items.length;
     while (i--) {
       if (items[i].element === document.activeElement) {
@@ -66,80 +53,60 @@ export class KeyboardNavDirective {
       return;
     }
 
-    const current: KeyboardNavItemDirective = items[active];
-    let target: KeyboardNavItemDirective = items[active + step];
-
-    // Favorites scrolling
-    if (current.favorite) {
-      if (target.favorite) {
-        target.element.focus();
-      } else {
-        current.element.focus();
-      }
-    } else {
-      // other scrolling
-      console.log(current.dirIndex, target.dirIndex);
-      target = items[active + step + 1];
-      target.element.focus();
-    }
+    const target = this.getTargetElement(event, {
+      active,
+      items,
+    });
+    target.element.focus();
+    target.element.scrollIntoView({
+      block: 'center',
+    });
   }
 
-  @HostListener('keydown.ArrowRight', ['$event'])
-  private _nav(event: KeyboardEvent): void {
-    event.stopPropagation();
-    event.preventDefault();
-
-    if (!this.items.length) {
-      return;
-    }
-
-    const items: KeyboardNavItemDirective[] = this.items.toArray() as KeyboardNavItemDirective[];
-
-    const step: number = 1;
-    let active: number;
-    let i: number = this.items.length;
-    while (i--) {
-      if (items[i].element === document.activeElement) {
-        active = i;
-        break;
-      }
-    }
-
-    let target: KeyboardNavItemDirective = items[active + step];
-
-    if (target.dirIndex % 2 !== 0) {
-      target = items[active + step];
-      target.element.focus();
-    }
-  }
-
-  @HostListener('keydown.ArrowLeft', ['$event'])
-  private _navLeft(event: KeyboardEvent): void {
-    event.stopPropagation();
-    event.preventDefault();
-
-    if (!this.items.length) {
-      return;
-    }
-
-    const items: KeyboardNavItemDirective[] = this.items.toArray() as KeyboardNavItemDirective[];
-
-    const step: number = -1;
-    let active: number;
-    let i: number = this.items.length;
-    while (i--) {
-      if (items[i].element === document.activeElement) {
-        active = i;
-        break;
-      }
-    }
-
-    let target: KeyboardNavItemDirective = items[active + step];
+  private getTargetElement(
+    event: KeyboardEvent,
+    element: {
+      active: number;
+      items: KeyboardNavItemDirective[];
+    },
+  ) {
+    const { items, active } = element;
     const current: KeyboardNavItemDirective = items[active];
+    let step: number = 1;
 
-    if (current.dirIndex !== 0 && target.dirIndex % 2 === 0) {
-      target = items[active + step];
-      target.element.focus();
+    let target = current;
+    switch (event.code) {
+      case 'ArrowDown':
+        if (current.favorite) {
+          if (!current.isLast) {
+            target = items[active + step];
+          }
+        } else {
+          step = 2;
+          target = items[active + step];
+        }
+        break;
+      case 'ArrowRight':
+        if (current.dirIndex % 2 === 0) {
+          target = items[active + step];
+        }
+        break;
+      case 'ArrowLeft':
+        if (current.dirIndex !== 0 && current.dirIndex % 2 !== 0) {
+          target = items[active - step];
+        }
+        /*if (!current.favorite) {
+        if (current.dirIndex < current.favLength * 2) {
+          target = items[current.dirIndex / 2];
+          target.element.focus();
+        } else {
+          target = items[current.favLength - 1];
+          target.element.focus();
+        }
+      }*/
+        break;
     }
+
+    return target;
   }
 }

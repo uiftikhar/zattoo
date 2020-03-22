@@ -1,5 +1,6 @@
 :host {
   height: 72px;
+  position: relative;
   overflow: hidden;
   display: grid;
   grid-template-columns: 369px 369px;
@@ -21,6 +22,14 @@
   box-shadow: 0 0 1.5rem 0.5rem rgba(0, 0, 0, 0.6);
   width: 368px;
 }
+
+.fixed-position {
+
+  //position: absolute;
+  //overflow-style: marquee-line;
+}
+
+
 
 .list-item {
   display: grid;
