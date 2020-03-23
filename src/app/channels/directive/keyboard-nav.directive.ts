@@ -51,7 +51,8 @@ export class KeyboardNavDirective implements OnChanges {
 
   private getToFavoritesMenu({ favoritesMenu, index }) {
     const items: KeyboardNavItemDirective[] = this.items.toArray() as KeyboardNavItemDirective[];
-    if (index > 5) {
+    console.log(items.filter(item => item.favorite));
+    /*if (index > 5) {
       index = index - 10 < 1 ? (index = 5) : index - 10;
     } else {
       index = index - 1;
@@ -60,7 +61,7 @@ export class KeyboardNavDirective implements OnChanges {
     if (target) {
       console.log(target.isVisibleInView, target);
       target.element.focus();
-    }
+    }*/
   }
   /**
    * Set focus to next/previous element.

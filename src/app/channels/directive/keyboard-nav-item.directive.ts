@@ -38,7 +38,6 @@ export class KeyboardNavItemDirective implements AfterViewInit {
   ngAfterViewInit() {
     this.observer = new IntersectionObserver(
       entries => {
-        console.log(entries);
         if (entries[0].isIntersecting === true) {
           this.isVisibleInView = true;
 
@@ -51,7 +50,7 @@ export class KeyboardNavItemDirective implements AfterViewInit {
           //
           this.isVisibleInView = false;
         }
-        console.log(this.element, this.isVisibleInView);
+        // console.log(this.element, this.isVisibleInView);
         // console.log(this.channel.title, this.channel.visibleInView);
       },
       {
