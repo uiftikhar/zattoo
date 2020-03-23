@@ -1,7 +1,4 @@
-import {
-  Component,
-  Input,
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input } from '@angular/core';
 import { Channel } from '../channels/interfaces/channel';
 
 @Component({
@@ -16,6 +13,4 @@ export class ListItemComponent {
   @Input() channel: Channel;
   @Input() index: number;
   @Input() favorite: boolean = false;
-
-  // isVisibleInView = false;
 }

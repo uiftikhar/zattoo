@@ -52,12 +52,13 @@ export class KeyboardNavDirective implements OnChanges {
   private getToFavoritesMenu({ favoritesMenu, index }) {
     const items: KeyboardNavItemDirective[] = this.items.toArray() as KeyboardNavItemDirective[];
     if (index > 5) {
-      index = 4;
+      index = index - 10 < 1 ? (index = 5) : index - 10;
     } else {
       index = index - 1;
     }
     const target = items && items[index];
     if (target) {
+      console.log(target.isVisibleInView, target);
       target.element.focus();
     }
   }

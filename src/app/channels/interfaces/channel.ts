@@ -12,4 +12,5 @@ export interface Channel {
   highestQuality?: Quality;
   recommendations: boolean;
   id: string;
+  visibleInView?: boolean;
 }
