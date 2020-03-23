@@ -29,6 +29,7 @@ export class KeyboardNavDirective {
   @HostListener('keydown.ArrowRight', ['$event'])
   @HostListener('keydown.ArrowDown', ['$event'])
   @HostListener('keydown.ArrowLeft', ['$event'])
+  @HostListener('keydown.ArrowUp', ['$event'])
   private nav(event: KeyboardEvent): void {
     event.stopPropagation();
     event.preventDefault();
@@ -104,6 +105,17 @@ export class KeyboardNavDirective {
           target.element.focus();
         }
       }*/
+        break;
+      case 'ArrowUp':
+        if (current.favorite) {
+            target = items[active - step];
+        } else {
+          step = 2;
+          if (current.dirIndex !== 0 && current.dirIndex !== 1) {
+            console.log(current.dirIndex);
+            target = items[active - step];
+          }
+        }
         break;
     }
 

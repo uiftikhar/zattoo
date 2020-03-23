@@ -12,7 +12,7 @@
     <app-list-item
       #item
       appKeyboardNavItem
-      *ngFor="let channel of (channels$ | async); let index = index"
+      *ngFor="let channel of (channels$ | async); let index = index; first as isFirst"
       [channel]="channel"
       [dirIndex]="index"
       [index]="index"
