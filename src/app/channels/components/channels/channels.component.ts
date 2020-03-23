@@ -2,7 +2,9 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  EventEmitter,
   OnInit,
+  Output,
   QueryList,
   ViewChildren,
 } from '@angular/core';
@@ -17,6 +19,13 @@ import { Channel } from '../../interfaces/channel';
 })
 export class ChannelsComponent implements OnInit, AfterViewInit {
   channels$: Observable<Channel[]>;
+  @Output() favoritesMenu: EventEmitter<{
+    favoritesMenu: boolean;
+    index: number;
+  }> = new EventEmitter<{
+    favoritesMenu: false;
+    index: 0;
+  }>();
 
   @ViewChildren('item', { read: ElementRef })
   public items: QueryList<ElementRef>;
@@ -30,5 +39,9 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.channels$ = this._channelsService.getAvailableHighestQualityChannels();
+  }
+
+  goToFavorites(event: { favoritesMenu: boolean; index: number }) {
+    this.favoritesMenu.emit(event);
   }
 }

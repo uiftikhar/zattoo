@@ -2,8 +2,11 @@ import {
   ContentChildren,
   Directive,
   HostListener,
+  Input,
+  OnChanges,
   QueryList,
   Renderer2,
+  SimpleChanges,
 } from '@angular/core';
 import { KeyboardNavItemDirective } from './keyboard-nav-item.directive';
 
@@ -12,8 +15,13 @@ import { KeyboardNavItemDirective } from './keyboard-nav-item.directive';
 @Directive({
   selector: '[appKeyboardNav]',
 })
-export class KeyboardNavDirective {
+export class KeyboardNavDirective implements OnChanges {
   constructor(private _renderer: Renderer2) {}
+
+  @Input() switchToFavoritesMenu: {
+    favoritesMenu: boolean;
+    index: number;
+  };
 
   /**
    * Keyboard nav items.
@@ -21,6 +29,38 @@ export class KeyboardNavDirective {
   @ContentChildren(KeyboardNavItemDirective, { descendants: true })
   public items: QueryList<KeyboardNavItemDirective>;
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.switchToFavoritesMenu) {
+      console.log('LOL', changes.switchToFavoritesMenu);
+      const response: {
+        favoritesMenu: boolean;
+        index: number;
+      } = {
+        index:
+          changes.switchToFavoritesMenu.currentValue &&
+          changes.switchToFavoritesMenu.currentValue.index,
+        favoritesMenu:
+          changes.switchToFavoritesMenu.currentValue &&
+          changes.switchToFavoritesMenu.currentValue.favoritesMenu,
+      };
+      if (changes.switchToFavoritesMenu.currentValue) {
+        this.getToFavoritesMenu(response);
+      }
+    }
+  }
+
+  private getToFavoritesMenu({ favoritesMenu, index }) {
+    const items: KeyboardNavItemDirective[] = this.items.toArray() as KeyboardNavItemDirective[];
+    if (index > 5) {
+      index = 4;
+    } else {
+      index = index - 1;
+    }
+    const target = items && items[index];
+    if (target) {
+      target.element.focus();
+    }
+  }
   /**
    * Set focus to next/previous element.
    *
@@ -97,7 +137,7 @@ export class KeyboardNavDirective {
         if (current.dirIndex % 2 !== 0) {
           target = items[active - step];
         } else if (current.dirIndex % 2 === 0 && !current.favorite) {
-          target = items[current.dirIndex];
+          target.favoritesMenu(current.dirIndex);
           console.log(active);
           // target = items[active - step];
         }

@@ -16,4 +16,6 @@ export class ListItemComponent {
   @Input() channel: Channel;
   @Input() index: number;
   @Input() favorite: boolean = false;
+
+  // isVisibleInView = false;
 }

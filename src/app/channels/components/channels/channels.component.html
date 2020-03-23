@@ -1,6 +1,7 @@
 <h1 class="h1">All channels</h1>
 <div class="channels-wrapper" appKeyboardNav>
   <app-list-item
+    #item
     appKeyboardNavItem
     *ngFor="
       let channel of (channels$ | async);
@@ -9,5 +10,6 @@
     [channel]="channel"
     [dirIndex]="index"
     [index]="index"
+    (goToFavorites)="goToFavorites($event)"
   ></app-list-item>
 </div>

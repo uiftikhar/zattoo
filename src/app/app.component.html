@@ -1,4 +1,4 @@
 <div class="wrapper">
-  <app-favorites></app-favorites>
-  <app-channels></app-channels>
+  <app-favorites [switchToFavoritesMenu]="switchToFavoritesMenu" ></app-favorites>
+  <app-channels (favoritesMenu)="isFavoriteMenuEnabled($event)"></app-channels>
 </div>

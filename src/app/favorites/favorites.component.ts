@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { ChannelsService } from '../channels/services/channels.service';
 import { Channel } from '../channels/interfaces/channel';
 
@@ -9,7 +9,10 @@ import { Channel } from '../channels/interfaces/channel';
 })
 export class FavoritesComponent implements OnInit {
   constructor(private readonly channelsService: ChannelsService) {}
-
+  @Input() switchToFavoritesMenu: {
+    favoritesMenu: boolean;
+    index: number;
+  };
   favorites: Channel[];
   ngOnInit(): void {
     this.channelsService.getAvailableHighestQualityChannels().subscribe(res => {
