@@ -1,5 +1,13 @@
-<app-list-item
-  *ngFor="let channel of (channels$ | async); let index = index"
-  [channel]="channel"
-  [index]="index"
-></app-list-item>
+<h1 class="h1">All channels</h1>
+<div class="channels-wrapper" appKeyboardNav>
+  <app-list-item
+    appKeyboardNavItem
+    *ngFor="
+      let channel of (channels$ | async);
+      let index = index;
+    "
+    [channel]="channel"
+    [dirIndex]="index"
+    [index]="index"
+  ></app-list-item>
+</div>

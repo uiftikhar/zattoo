@@ -1,9 +1,7 @@
 import {
-  AfterContentInit,
-  AfterViewChecked,
   AfterViewInit,
-  Component, ContentChildren,
-  HostListener,
+  Component,
+  ElementRef,
   OnInit,
   QueryList,
   ViewChildren,
@@ -11,8 +9,6 @@ import {
 import { ChannelsService } from '../../services/channels.service';
 import { Observable } from 'rxjs';
 import { Channel } from '../../interfaces/channel';
-import { ListItemComponent } from '../../../list-item/list-item.component';
-import { FocusKeyManager } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-channels',
@@ -21,21 +17,18 @@ import { FocusKeyManager } from '@angular/cdk/a11y';
 })
 export class ChannelsComponent implements OnInit, AfterViewInit {
   channels$: Observable<Channel[]>;
-  favorites: Channel[];
-  @ViewChildren(ListItemComponent) _items: QueryList<ListItemComponent>;
-  items: QueryList<ListItemComponent>;
+
+  @ViewChildren('item', { read: ElementRef })
+  public items: QueryList<ElementRef>;
   constructor(private readonly _channelsService: ChannelsService) {}
 
-
-  ngAfterViewInit() {
-    this.items = this._items;
+  public ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.items.first.nativeElement.focus();
+    }, 500);
   }
 
   ngOnInit(): void {
     this.channels$ = this._channelsService.getAvailableHighestQualityChannels();
-    this._channelsService.getAvailableHighestQualityChannels().subscribe(res => {
-      this.favorites = res.filter((_, index) => index < 10);
-      console.log(this.favorites);
-    });
   }
 }

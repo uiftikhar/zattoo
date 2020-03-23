@@ -1,30 +1,4 @@
-<div class="wrapper" appKeyboardNav>
-  <div>
-    <h1 class="h1">favorite channels<span class="span">({{favorites?.length}})</span></h1>
-    <div class="favorites-wrapper">
-      <app-list-item
-        [favorite]="true"
-        *ngFor="let channel of favorites; let index = index; last as isLast"
-        appKeyboardNavItem="{{ true }}"
-        [isLast]="isLast"
-        [favLength]="favorites.length"
-        [channel]="channel"
-        [index]="index"
-      ></app-list-item>
-    </div>
-  </div>
-  <div>
-    <h1 class="h1">All channels</h1>
-    <div class="channels-wrapper">
-      <app-list-item
-        #item
-        appKeyboardNavItem
-        *ngFor="let channel of (channels$ | async); let index = index; first as isFirst"
-        [channel]="channel"
-        [dirIndex]="index"
-        [index]="index"
-        [favLength]="favorites.length"
-      ></app-list-item>
-    </div>
-  </div>
+<div class="wrapper">
+  <app-favorites></app-favorites>
+  <app-channels></app-channels>
 </div>

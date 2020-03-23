@@ -1,42 +1,7 @@
-.channels-wrapper {
-  height: 650px;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: [channel-1]371px [channel-2]371px;
-  grid-template-rows: repeat(9, minmax(72px, auto));
-  grid-auto-flow: row;
-  padding: 0.5px;
-}
-
-.favorites-wrapper {
-  height: 650px;
-  width: 371px;
-  overflow: hidden;
-  padding: 0.5px;
-}
-
 .wrapper {
   display: flex;
   justify-content: space-between;
   padding-left: 85px;
   padding-top: 40px;
   padding-right: 88px;
-}
-
-.h1 {
-  color: #fff;
-  font-size: 25px;
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 42px;
-  text-align: center;
-  margin-bottom: 64px;
-  margin-top: 21px;
-  height: max-content;
-}
-
-.span {
-  font-weight: 400;
-  color: #9b9b9b;
-  margin-left: 12px;
 }
