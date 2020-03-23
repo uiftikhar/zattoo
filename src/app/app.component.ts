@@ -38,7 +38,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this._channelsService
       .getAvailableHighestQualityChannels()
       .subscribe(res => {
-        this.favorites = res.filter((abc, index) => index < 7);
+        this.favorites = res.filter((abc, index) => index < 15);
       });
   }
 }

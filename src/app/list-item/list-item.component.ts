@@ -21,21 +21,8 @@ import { FocusableOption } from '@angular/cdk/a11y';
     tabindex: '-1',
   },
 })
-export class ListItemComponent
-  implements FocusableOption, AfterViewInit {
+export class ListItemComponent {
   @Input() channel: Channel;
   @Input() index: number;
   @Input() favorite = false;
-  constructor(private readonly _elementRef: ElementRef) {}
-
-  ngAfterViewInit() {
-    // this.scrollContainer = this.scrollFrame;
-    // console.log(this.scrollContainer.scroll());
-    // console.log(this.scrollContainer.scroll());
-  }
-
-  focus() {
-    this._elementRef.nativeElement.focus();
-  }
-
 }

@@ -4,6 +4,7 @@
 
 :host(:focus) {
   outline: 0.1rem solid rgba(255, 255, 255, 0.8);
+  //outline: 1px dashed red;
   background-color: #383838;
   z-index: 1;
   box-shadow: 0 0 1.5rem 0.5rem rgba(0, 0, 0, 0.6);
@@ -12,16 +13,21 @@
 
 .list-item {
   display: grid;
-  grid-template-columns: 57px auto 121px;
+  grid-template-columns: 57px auto 121px 64px;
   align-items: center;
   height: 71px;
-  width: 288px;
   line-height: 71px;
   padding-left: 16px;
   margin-bottom: 0.1rem;
   background-color: #232323;
   box-shadow: 0 0.2rem 0.2rem 0 rgba(0, 0, 0, 0.6);
-  padding-right: 64px;
+}
+
+.fa-star,
+.fa-star-o {
+  font-size: 19px;
+  color: #ebebeb;
+  text-align: center;
 }
 
 .channel-number {

@@ -58,10 +58,11 @@ export class KeyboardNavDirective {
       active,
       items,
     });
-    target.element.focus();
+
     target.element.scrollIntoView({
       block: 'center',
     });
+    target.element.focus();
   }
 
   private getTargetElement(
@@ -93,26 +94,20 @@ export class KeyboardNavDirective {
         }
         break;
       case 'ArrowLeft':
-        if (current.dirIndex !== 0 && current.dirIndex % 2 !== 0) {
+        if (current.dirIndex % 2 !== 0) {
           target = items[active - step];
+        } else if (current.dirIndex % 2 === 0 && !current.favorite) {
+          target = items[current.dirIndex];
+          console.log(active);
+          // target = items[active - step];
         }
-        /*if (!current.favorite) {
-        if (current.dirIndex < current.favLength * 2) {
-          target = items[current.dirIndex / 2];
-          target.element.focus();
-        } else {
-          target = items[current.favLength - 1];
-          target.element.focus();
-        }
-      }*/
         break;
       case 'ArrowUp':
         if (current.favorite) {
-            target = items[active - step];
+          target = items[active - step];
         } else {
           step = 2;
           if (current.dirIndex !== 0 && current.dirIndex !== 1) {
-            console.log(current.dirIndex);
             target = items[active - step];
           }
         }
