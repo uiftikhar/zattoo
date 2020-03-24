@@ -36,7 +36,6 @@ export class KeyboardNavDirective implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.switchToFavoritesMenu) {
-      // console.log('LOL', changes.switchToFavoritesMenu);
       const response: {
         favoritesMenu: boolean;
         index: number;
@@ -54,7 +53,6 @@ export class KeyboardNavDirective implements OnChanges {
     }
 
     if (changes.switchToChannelsMenu) {
-      console.log('LOL', changes.switchToChannelsMenu);
       const response: {
         switchToChannelsMenu: boolean;
         index: number;
@@ -131,6 +129,7 @@ export class KeyboardNavDirective implements OnChanges {
     if (event.code === 'ArrowDown') {
       target.element.scrollIntoView({
         block: 'center',
+        inline: 'center'
       });
     }
   }
@@ -162,7 +161,6 @@ export class KeyboardNavDirective implements OnChanges {
         if (current.favorite) {
           const index = items.findIndex(item => item.isVisibleInView);
           const numberOfElementsToSkip = current.dirIndex - index;
-          console.log(numberOfElementsToSkip);
           target.channelsMenu(numberOfElementsToSkip);
         } else if (!current.favorite && current.dirIndex % 2 === 0) {
           target = items[active + step];

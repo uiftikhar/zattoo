@@ -29,7 +29,6 @@ export class AppComponent {
     index: number;
   }) {
     this.switchToChannelsMenu = goToChannelsMenu;
-    console.log(123, this.switchToChannelsMenu);
 
   }
 }

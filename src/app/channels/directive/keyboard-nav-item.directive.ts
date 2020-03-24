@@ -3,7 +3,7 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
-  Input,
+  Input, OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
@@ -11,7 +11,7 @@ import {
 @Directive({
   selector: '[appKeyboardNavItem]',
 })
-export class KeyboardNavItemDirective implements AfterViewInit {
+export class KeyboardNavItemDirective implements AfterViewInit, OnDestroy {
   @Input() favorite: boolean = false;
   @Input() isLast: boolean = false;
   @Input() dirIndex: number = 0;
@@ -34,7 +34,6 @@ export class KeyboardNavItemDirective implements AfterViewInit {
   }>();
 
   constructor(private elementRef: ElementRef) {
-    // console.log(this.element);
   }
 
   /**
@@ -50,11 +49,9 @@ export class KeyboardNavItemDirective implements AfterViewInit {
       entries => {
         if (entries[0].isIntersecting === true) {
           this.isVisibleInView = true;
-          // this.observer.disconnect();
         } else {
           this.isVisibleInView = false;
         }
-        // console.log('test');
       },
       {
         threshold: 0.75,
@@ -76,5 +73,9 @@ export class KeyboardNavItemDirective implements AfterViewInit {
       channelsMenu: true,
       index,
     });
+  }
+
+  ngOnDestroy(): void {
+    this.observer.disconnect();
   }
 }
