@@ -5,8 +5,10 @@
     *ngFor="let channel of favorites; let index = index; last as isLast"
     appKeyboardNavItem="{{ true }}"
     [isLast]="isLast"
+    [dirIndex]="index"
     [favLength]="favorites.length"
     [channel]="channel"
     [index]="index"
+    (goToChannelsMenu)="goToChannels($event)"
   ></app-list-item>
 </div>

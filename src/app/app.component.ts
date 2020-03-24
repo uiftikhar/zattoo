@@ -6,15 +6,30 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  switchToFavoritesMenu:{
+  switchToFavoritesMenu: {
     favoritesMenu: boolean;
     index: number;
   };
+
+  switchToChannelsMenu: {
+    channelsMenu: boolean;
+    index: number;
+  };
+
   isFavoriteMenuEnabled(goToFavMenu: {
     favoritesMenu: boolean;
     index: number;
   }) {
     this.switchToFavoritesMenu = goToFavMenu;
     // console.log(this.switchToFavoritesMenu);
+  }
+
+  isChannelsMenuEnabled(goToChannelsMenu: {
+    channelsMenu: boolean;
+    index: number;
+  }) {
+    this.switchToChannelsMenu = goToChannelsMenu;
+    console.log(123, this.switchToChannelsMenu);
+
   }
 }

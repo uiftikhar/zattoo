@@ -2,7 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter,
+  EventEmitter, Input,
   OnInit,
   Output,
   QueryList,
@@ -26,6 +26,11 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
     favoritesMenu: false;
     index: 0;
   }>();
+
+  @Input() switchToChannelsMenu: {
+    channelsMenu: boolean;
+    index: number;
+  };
 
   @ViewChildren('item', { read: ElementRef })
   public items: QueryList<ElementRef>;

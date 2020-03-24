@@ -23,6 +23,11 @@ export class KeyboardNavDirective implements OnChanges {
     index: number;
   };
 
+  @Input() switchToChannelsMenu: {
+    channelsMenu: boolean;
+    index: number;
+  };
+
   /**
    * Keyboard nav items.
    */
@@ -47,13 +52,39 @@ export class KeyboardNavDirective implements OnChanges {
         this.getToFavoritesMenu(response);
       }
     }
+
+    if (changes.switchToChannelsMenu) {
+      console.log('LOL', changes.switchToChannelsMenu);
+      const response: {
+        switchToChannelsMenu: boolean;
+        index: number;
+      } = {
+        index:
+          changes.switchToChannelsMenu.currentValue &&
+          changes.switchToChannelsMenu.currentValue.index,
+        switchToChannelsMenu:
+          changes.switchToChannelsMenu.currentValue &&
+          changes.switchToChannelsMenu.currentValue.favoritesMenu,
+      };
+      if (changes.switchToChannelsMenu.currentValue) {
+        this.getToChannelsMenu(response);
+      }
+    }
   }
 
   private getToFavoritesMenu({ favoritesMenu, index }) {
     const items: KeyboardNavItemDirective[] = this.items.toArray() as KeyboardNavItemDirective[];
     const _index = items.findIndex(item => item.isVisibleInView === true);
-    console.log(index);
     const target = items && items[_index + index];
+    if (target) {
+      target.element.focus();
+    }
+  }
+
+  private getToChannelsMenu({ switchToChannelsMenu, index }) {
+    const items: KeyboardNavItemDirective[] = this.items.toArray() as KeyboardNavItemDirective[];
+    const _index = items.findIndex(item => item.isVisibleInView === true);
+    const target = items && items[_index + 2 * index];
     if (target) {
       target.element.focus();
     }
@@ -128,23 +159,31 @@ export class KeyboardNavDirective implements OnChanges {
         }
         break;
       case 'ArrowRight':
-        if (current.dirIndex % 2 === 0) {
+        if (current.favorite) {
+          const index = items.findIndex(item => item.isVisibleInView);
+          const numberOfElementsToSkip = current.dirIndex - index;
+          console.log(numberOfElementsToSkip);
+          target.channelsMenu(numberOfElementsToSkip);
+        } else if (!current.favorite && current.dirIndex % 2 === 0) {
           target = items[active + step];
         }
         break;
       case 'ArrowLeft':
-        if (current.dirIndex % 2 !== 0) {
-          target = items[active - step];
-        } else if (current.dirIndex % 2 === 0 && !current.favorite) {
-          const index = items.findIndex(item => item.isVisibleInView);
-          const numberOfElementsToSkip = current.dirIndex / 2 - index / 2;
-          console.log(index / 2, current.dirIndex / 2, items[index].element);
-          target.favoritesMenu(numberOfElementsToSkip);
+        if (!current.favorite) {
+          if (current.dirIndex % 2 !== 0) {
+            target = items[active - step];
+          } else if (current.dirIndex % 2 === 0 && !current.favorite) {
+            const index = items.findIndex(item => item.isVisibleInView);
+            const numberOfElementsToSkip = current.dirIndex / 2 - index / 2;
+            target.favoritesMenu(numberOfElementsToSkip);
+          }
         }
         break;
       case 'ArrowUp':
         if (current.favorite) {
-          target = items[active - step];
+          if (current.dirIndex !== 0) {
+            target = items[active - step];
+          }
         } else {
           step = 2;
           if (current.dirIndex !== 0 && current.dirIndex !== 1) {

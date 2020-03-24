@@ -16,6 +16,7 @@ export class KeyboardNavItemDirective implements AfterViewInit {
   @Input() isLast: boolean = false;
   @Input() dirIndex: number = 0;
   @Input() favLength: number = 0;
+
   @Output() goToFavorites: EventEmitter<{
     favoritesMenu: boolean;
     index: number;
@@ -23,6 +24,15 @@ export class KeyboardNavItemDirective implements AfterViewInit {
     favoritesMenu: false;
     index: 0;
   }>();
+
+  @Output() goToChannelsMenu: EventEmitter<{
+    channelsMenu: boolean;
+    index: number;
+  }> = new EventEmitter<{
+    channelsMenu: false;
+    index: 0;
+  }>();
+
   constructor(private elementRef: ElementRef) {
     // console.log(this.element);
   }
@@ -57,6 +67,13 @@ export class KeyboardNavItemDirective implements AfterViewInit {
   favoritesMenu(index: number) {
     this.goToFavorites.emit({
       favoritesMenu: true,
+      index,
+    });
+  }
+
+  channelsMenu(index: number) {
+    this.goToChannelsMenu.emit({
+      channelsMenu: true,
       index,
     });
   }
