@@ -1,0 +1,28 @@
+<h1 class="h1">
+  favorite channels<span class="span"
+    >({{ (favorites$ | async)?.length }})</span
+  >
+</h1>
+<div
+  class="favorites-wrapper"
+  appKeyboardNav
+  [switchToFavoritesMenu]="switchToFavoritesMenu"
+>
+  <app-list-item
+    [favorite]="true"
+    *ngFor="
+      let channel of favorites;
+      let index = index;
+      last as isLast
+    "
+    appKeyboardNavItem="{{ true }}"
+    [isLast]="isLast"
+    [dirIndex]="index"
+    [channel]="channel"
+    [index]="index"
+    (goToChannelsMenu)="goToChannels($event)"
+    (deferLoad)="loadImages = true"
+    [loadImages]="loadImages"
+    (toggleFavorite)="toggleFavorite($event)"
+  ></app-list-item>
+</div>

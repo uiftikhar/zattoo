@@ -34,39 +34,35 @@ export class KeyboardNavDirective implements OnChanges {
   @ContentChildren(KeyboardNavItemDirective, { descendants: true })
   public items: QueryList<KeyboardNavItemDirective>;
 
+  // TODO: Lazyload imagess
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.switchToFavoritesMenu) {
+    if (
+      changes.switchToFavoritesMenu &&
+      changes.switchToFavoritesMenu.currentValue
+    ) {
       const response: {
         favoritesMenu: boolean;
         index: number;
       } = {
-        index:
-          changes.switchToFavoritesMenu.currentValue &&
-          changes.switchToFavoritesMenu.currentValue.index,
-        favoritesMenu:
-          changes.switchToFavoritesMenu.currentValue &&
-          changes.switchToFavoritesMenu.currentValue.favoritesMenu,
+        index: changes.switchToFavoritesMenu.currentValue.index,
+        favoritesMenu: changes.switchToFavoritesMenu.currentValue.favoritesMenu,
       };
-      if (changes.switchToFavoritesMenu.currentValue) {
-        this.getToFavoritesMenu(response);
-      }
+      this.getToFavoritesMenu(response);
     }
 
-    if (changes.switchToChannelsMenu) {
+    if (
+      changes.switchToChannelsMenu &&
+      changes.switchToChannelsMenu.currentValue
+    ) {
       const response: {
         switchToChannelsMenu: boolean;
         index: number;
       } = {
-        index:
-          changes.switchToChannelsMenu.currentValue &&
-          changes.switchToChannelsMenu.currentValue.index,
+        index: changes.switchToChannelsMenu.currentValue.index,
         switchToChannelsMenu:
-          changes.switchToChannelsMenu.currentValue &&
           changes.switchToChannelsMenu.currentValue.favoritesMenu,
       };
-      if (changes.switchToChannelsMenu.currentValue) {
-        this.getToChannelsMenu(response);
-      }
+      this.getToChannelsMenu(response);
     }
   }
 
@@ -87,6 +83,7 @@ export class KeyboardNavDirective implements OnChanges {
       target.element.focus();
     }
   }
+
   /**
    * Set focus to next/previous element.
    *
@@ -105,16 +102,7 @@ export class KeyboardNavDirective implements OnChanges {
     }
 
     const items: KeyboardNavItemDirective[] = this.items.toArray() as KeyboardNavItemDirective[];
-
-    let active: number = 0;
-    let i: number = this.items.length;
-    while (i--) {
-      if (items[i].element === document.activeElement) {
-        active = i;
-        break;
-      }
-    }
-
+    const active: number = this.getActiveItemIndex();
     if (active === undefined) {
       items[0].element.focus();
       return;
@@ -129,9 +117,23 @@ export class KeyboardNavDirective implements OnChanges {
     if (event.code === 'ArrowDown') {
       target.element.scrollIntoView({
         block: 'center',
-        inline: 'center'
+        inline: 'center',
       });
     }
+  }
+
+  private getActiveItemIndex() {
+    const items: KeyboardNavItemDirective[] = this.items.toArray() as KeyboardNavItemDirective[];
+
+    let active: number = 0;
+    let i: number = this.items.length;
+    while (i--) {
+      if (items[i].element === document.activeElement) {
+        active = i;
+        break;
+      }
+    }
+    return active;
   }
 
   private getTargetElement(
@@ -143,50 +145,78 @@ export class KeyboardNavDirective implements OnChanges {
   ) {
     const { items, active } = element;
     const current: KeyboardNavItemDirective = items[active];
-    let step: number = 1;
+    const isFavoriteNavigation = current.favorite;
+    if (isFavoriteNavigation) {
+      return this._favoriteNavigation(event, { active, items, current });
+    } else {
+      return this._channelsNavigation(event, { active, items, current });
+    }
+  }
 
-    let target = current;
+  private _favoriteNavigation(
+    event: KeyboardEvent,
+    element: {
+      active: number;
+      items: KeyboardNavItemDirective[];
+      current: KeyboardNavItemDirective;
+    },
+  ): KeyboardNavItemDirective {
+    const { items, active, current } = element;
+    let target: KeyboardNavItemDirective = current;
     switch (event.code) {
       case 'ArrowDown':
-        if (current.favorite) {
-          if (!current.isLast) {
-            target = items[active + step];
-          }
-        } else {
-          step = 2;
-          target = items[active + step];
+        if (!current.isLast) {
+          target = items[active + 1];
         }
         break;
       case 'ArrowRight':
-        if (current.favorite) {
-          const index = items.findIndex(item => item.isVisibleInView);
-          const numberOfElementsToSkip = current.dirIndex - index;
-          target.channelsMenu(numberOfElementsToSkip);
-        } else if (!current.favorite && current.dirIndex % 2 === 0) {
+        const index = items.findIndex(item => item.isVisibleInView);
+        const numberOfElementsToSkip = current.dirIndex - index;
+        target.channelsMenu(numberOfElementsToSkip);
+        break;
+      case 'ArrowUp':
+        if (current.dirIndex !== 0) {
+          target = items[active - 1];
+        }
+        break;
+    }
+    return target;
+  }
+
+  private _channelsNavigation(
+    event: KeyboardEvent,
+    element: {
+      active: number;
+      items: KeyboardNavItemDirective[];
+      current: KeyboardNavItemDirective;
+    },
+  ): KeyboardNavItemDirective {
+    const { items, active, current } = element;
+    let target: KeyboardNavItemDirective = current;
+    let step: number = 1;
+    switch (event.code) {
+      case 'ArrowDown':
+        step = 2;
+        target = items[active + step];
+        break;
+      case 'ArrowRight':
+        if (current.dirIndex % 2 === 0) {
           target = items[active + step];
         }
         break;
       case 'ArrowLeft':
-        if (!current.favorite) {
-          if (current.dirIndex % 2 !== 0) {
-            target = items[active - step];
-          } else if (current.dirIndex % 2 === 0 && !current.favorite) {
-            const index = items.findIndex(item => item.isVisibleInView);
-            const numberOfElementsToSkip = current.dirIndex / 2 - index / 2;
-            target.favoritesMenu(numberOfElementsToSkip);
-          }
+        if (current.dirIndex % 2 !== 0) {
+          target = items[active - step];
+        } else if (current.dirIndex % 2 === 0 && !current.favorite) {
+          const index = items.findIndex(item => item.isVisibleInView);
+          const numberOfElementsToSkip = current.dirIndex / 2 - index / 2;
+          target.favoritesMenu(numberOfElementsToSkip);
         }
         break;
       case 'ArrowUp':
-        if (current.favorite) {
-          if (current.dirIndex !== 0) {
-            target = items[active - step];
-          }
-        } else {
-          step = 2;
-          if (current.dirIndex !== 0 && current.dirIndex !== 1) {
-            target = items[active - step];
-          }
+        step = 2;
+        if (current.dirIndex !== 0 && current.dirIndex !== 1) {
+          target = items[active - step];
         }
         break;
     }

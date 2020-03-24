@@ -3,7 +3,8 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
-  Input, OnDestroy,
+  Input,
+  OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
@@ -15,7 +16,6 @@ export class KeyboardNavItemDirective implements AfterViewInit, OnDestroy {
   @Input() favorite: boolean = false;
   @Input() isLast: boolean = false;
   @Input() dirIndex: number = 0;
-  @Input() favLength: number = 0;
 
   @Output() goToFavorites: EventEmitter<{
     favoritesMenu: boolean;
@@ -33,8 +33,9 @@ export class KeyboardNavItemDirective implements AfterViewInit, OnDestroy {
     index: 0;
   }>();
 
-  constructor(private elementRef: ElementRef) {
-  }
+  @Output() public deferLoad: EventEmitter<any> = new EventEmitter();
+
+  constructor(private elementRef: ElementRef) {}
 
   /**
    * Host native element.
@@ -47,11 +48,7 @@ export class KeyboardNavItemDirective implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.observer = new IntersectionObserver(
       entries => {
-        if (entries[0].isIntersecting === true) {
-          this.isVisibleInView = true;
-        } else {
-          this.isVisibleInView = false;
-        }
+        this.checkForIntersection(entries);
       },
       {
         threshold: 0.75,
@@ -59,6 +56,25 @@ export class KeyboardNavItemDirective implements AfterViewInit, OnDestroy {
     );
 
     this.observer.observe(this.elementRef.nativeElement as HTMLElement);
+  }
+
+  private checkForIntersection = (
+    entries: Array<IntersectionObserverEntry>,
+  ) => {
+    entries.forEach((entry: IntersectionObserverEntry) => {
+      this.isVisibleInView = false;
+      if (this.checkIfIntersecting(entry)) {
+        this.deferLoad.emit();
+        this.isVisibleInView = true;
+      }
+    });
+  };
+
+  private checkIfIntersecting(entry: IntersectionObserverEntry) {
+    return (
+      (<any>entry).isIntersecting &&
+      entry.target === this.elementRef.nativeElement
+    );
   }
 
   favoritesMenu(index: number) {
@@ -76,6 +92,7 @@ export class KeyboardNavItemDirective implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.observer.unobserve(<Element>this.elementRef.nativeElement);
     this.observer.disconnect();
   }
 }

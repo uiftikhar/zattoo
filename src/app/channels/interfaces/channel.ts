@@ -13,4 +13,5 @@ export interface Channel {
   recommendations: boolean;
   id: string;
   visibleInView?: boolean;
+  isFavorite?: boolean;
 }

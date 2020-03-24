@@ -11,5 +11,8 @@
     [dirIndex]="index"
     [index]="index"
     (goToFavorites)="goToFavorites($event)"
+    (deferLoad)="setLoadImages()"
+    [loadImages]="loadImages"
+    (toggleFavorite)="toggleFavorite($event)"
   ></app-list-item>
 </div>

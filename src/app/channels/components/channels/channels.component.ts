@@ -36,11 +36,16 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
   @ViewChildren('item', { read: ElementRef })
   public items: QueryList<ElementRef>;
   constructor(private readonly _channelsService: ChannelsService) {}
+  loadImages: boolean = false;
 
   public ngAfterViewInit(): void {
     setTimeout(() => {
       this.items.first.nativeElement.focus();
     }, 500);
+  }
+
+  setLoadImages() {
+    this.loadImages = true;
   }
 
   ngOnInit(): void {
@@ -49,5 +54,10 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
 
   goToFavorites(event: { favoritesMenu: boolean; index: number }) {
     this.favoritesMenu.emit(event);
+  }
+
+  toggleFavorite(event: { channel: Channel; isFavorite: boolean }) {
+    console.log(event.isFavorite);
+    this._channelsService.toggleFavorite(event.channel, event.isFavorite);
   }
 }
