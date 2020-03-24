@@ -40,21 +40,14 @@ export class KeyboardNavItemDirective implements AfterViewInit {
       entries => {
         if (entries[0].isIntersecting === true) {
           this.isVisibleInView = true;
-
-          // Probably needs to be called in production
-          //
-          this.observer.disconnect();
+          // this.observer.disconnect();
         } else {
-          // Probably not interesting in production
-          // but used for demo purposes
-          //
           this.isVisibleInView = false;
         }
-        // console.log(this.element, this.isVisibleInView);
-        // console.log(this.channel.title, this.channel.visibleInView);
+        // console.log('test');
       },
       {
-        threshold: 1,
+        threshold: 0.75,
       },
     );
 

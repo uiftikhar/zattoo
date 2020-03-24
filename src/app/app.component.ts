@@ -15,6 +15,6 @@ export class AppComponent {
     index: number;
   }) {
     this.switchToFavoritesMenu = goToFavMenu;
-    console.log(this.switchToFavoritesMenu);
+    // console.log(this.switchToFavoritesMenu);
   }
 }

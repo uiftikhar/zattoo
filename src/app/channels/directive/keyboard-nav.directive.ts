@@ -31,7 +31,7 @@ export class KeyboardNavDirective implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.switchToFavoritesMenu) {
-      console.log('LOL', changes.switchToFavoritesMenu);
+      // console.log('LOL', changes.switchToFavoritesMenu);
       const response: {
         favoritesMenu: boolean;
         index: number;
@@ -51,17 +51,12 @@ export class KeyboardNavDirective implements OnChanges {
 
   private getToFavoritesMenu({ favoritesMenu, index }) {
     const items: KeyboardNavItemDirective[] = this.items.toArray() as KeyboardNavItemDirective[];
-    console.log(items.filter(item => item.favorite));
-    /*if (index > 5) {
-      index = index - 10 < 1 ? (index = 5) : index - 10;
-    } else {
-      index = index - 1;
-    }
-    const target = items && items[index];
+    const _index = items.findIndex(item => item.isVisibleInView === true);
+    console.log(index);
+    const target = items && items[_index + index];
     if (target) {
-      console.log(target.isVisibleInView, target);
       target.element.focus();
-    }*/
+    }
   }
   /**
    * Set focus to next/previous element.
@@ -101,10 +96,12 @@ export class KeyboardNavDirective implements OnChanges {
       items,
     });
 
-    target.element.scrollIntoView({
-      block: 'center',
-    });
     target.element.focus();
+    if (event.code === 'ArrowDown') {
+      target.element.scrollIntoView({
+        block: 'center',
+      });
+    }
   }
 
   private getTargetElement(
@@ -139,9 +136,10 @@ export class KeyboardNavDirective implements OnChanges {
         if (current.dirIndex % 2 !== 0) {
           target = items[active - step];
         } else if (current.dirIndex % 2 === 0 && !current.favorite) {
-          target.favoritesMenu(current.dirIndex);
-          console.log(active);
-          // target = items[active - step];
+          const index = items.findIndex(item => item.isVisibleInView);
+          const numberOfElementsToSkip = current.dirIndex / 2 - index / 2;
+          console.log(index / 2, current.dirIndex / 2, items[index].element);
+          target.favoritesMenu(numberOfElementsToSkip);
         }
         break;
       case 'ArrowUp':

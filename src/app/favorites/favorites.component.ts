@@ -16,7 +16,7 @@ export class FavoritesComponent implements OnInit {
   favorites: Channel[];
   ngOnInit(): void {
     this.channelsService.getAvailableHighestQualityChannels().subscribe(res => {
-      this.favorites = res.filter((_, index) => index < 10);
+      this.favorites = res.filter((_, index) => index < 20);
     });
   }
 }
