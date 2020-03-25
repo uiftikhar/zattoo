@@ -8,6 +8,7 @@
       "cid": "itv-2",
       "group_index": 0,
       "recording": true,
+      "isFavorite": true,
       "qualities": [
         {
           "logo_white_84": "/images/channels/logos/f6419f10df08cc3c0a7d/white/84x48.png",
@@ -39,6 +40,7 @@
       "cid": "itv-3",
       "group_index": 0,
       "recording": true,
+      "isFavorite":  true,
       "qualities": [
         {
           "logo_white_84": "/images/channels/logos/b3cc7f6cfce81f137302/white/84x48.png",
@@ -70,6 +72,7 @@
       "cid": "itv-4",
       "group_index": 0,
       "recording": true,
+      "isFavorite":  true,
       "qualities": [
         {
           "logo_white_84": "/images/channels/logos/eabf59766e77192dba48/white/84x48.png",
@@ -101,6 +104,7 @@
       "cid": "itvbe",
       "group_index": 0,
       "recording": true,
+      "isFavorite":  true,
       "qualities": [
         {
           "logo_white_84": "/images/channels/logos/bbab3779254889364b14/white/84x48.png",
@@ -132,6 +136,7 @@
       "cid": "bbc2",
       "group_index": 0,
       "recording": true,
+      "isFavorite":  true,
       "qualities": [
         {
           "logo_white_84": "/images/channels/logos/63de162fc192e8b60d64/white/84x48.png",
@@ -181,6 +186,7 @@
       "cid": "bbc-four",
       "group_index": 0,
       "recording": true,
+      "isFavorite":  true,
       "qualities": [
         {
           "logo_white_84": "/images/channels/logos/d2a47198bc1c7a8a5123/white/84x48.png",
@@ -230,6 +236,7 @@
       "cid": "itv-1-london",
       "group_index": 0,
       "recording": true,
+      "isFavorite":  true,
       "qualities": [
         {
           "logo_white_84": "/images/channels/logos/d0fe0d3aebb8f801587d/white/84x48.png",
@@ -279,6 +286,7 @@
       "cid": "bbc-one",
       "group_index": 0,
       "recording": true,
+      "isFavorite":  true,
       "qualities": [
         {
           "logo_white_84": "/images/channels/logos/88497e7bca67fde6a313/white/84x48.png",

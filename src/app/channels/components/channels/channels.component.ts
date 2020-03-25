@@ -19,7 +19,7 @@ import { Channel } from '../../interfaces/channel';
   styleUrls: ['./channels.component.scss'],
 })
 export class ChannelsComponent implements OnInit, AfterViewInit {
-  channels$: Observable<Channel[]>;
+  channels: Channel[];
   @Output() favoritesMenu: EventEmitter<{
     favoritesMenu: boolean;
     index: number;
@@ -49,7 +49,7 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.channels$ = this._channelsService.getAvailableHighestQualityChannels();
+    this._channelsService.abc().subscribe(res => (this.channels = res));
   }
 
   goToFavorites(event: { favoritesMenu: boolean; index: number }) {

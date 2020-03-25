@@ -10,6 +10,6 @@
     />
   </div>
   <span class="channel-title">{{ channel?.title }}</span>
-  <i *ngIf="!favorite" class="fa fa-star-o" aria-hidden="true"> </i>
-  <i *ngIf="favorite" class="fa fa-star" aria-hidden="true"> </i>
+  <i *ngIf="!channel.isFavorite" class="fa fa-star-o" aria-hidden="true"> </i>
+  <i *ngIf="channel.isFavorite" class="fa fa-star" aria-hidden="true"> </i>
 </div>

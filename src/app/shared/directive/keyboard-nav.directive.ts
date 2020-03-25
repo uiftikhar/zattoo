@@ -9,6 +9,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { KeyboardNavItemDirective } from './keyboard-nav-item.directive';
+import {favoriteNavigation} from '../utils/favorites-navigation.util';
+import {channelsNavigation} from '../utils/channels-navigation.util';
 
 //
 
@@ -34,7 +36,7 @@ export class KeyboardNavDirective implements OnChanges {
   @ContentChildren(KeyboardNavItemDirective, { descendants: true })
   public items: QueryList<KeyboardNavItemDirective>;
 
-  // TODO: Lazyload imagess
+  // TODO: favorites focus input and trigger?
   ngOnChanges(changes: SimpleChanges): void {
     if (
       changes.switchToFavoritesMenu &&
@@ -103,23 +105,22 @@ export class KeyboardNavDirective implements OnChanges {
 
     const items: KeyboardNavItemDirective[] = this.items.toArray() as KeyboardNavItemDirective[];
     const active: number = this.getActiveItemIndex();
-    if (active === undefined) {
-      items[0].element.focus();
-      return;
-    }
 
     const target = this.getTargetElement(event, {
       active,
       items,
     });
-
-    target.element.focus();
+    const _index = items.findIndex(item => item.isVisibleInView === true);
     if (event.code === 'ArrowDown') {
+
+    }
+    if (event.code === 'ArrowUp') {
       target.element.scrollIntoView({
-        block: 'center',
-        inline: 'center',
+        // type ScrollLogicalPosition = "start" | "center" | "end" | "nearest";
+        block: 'nearest',
       });
     }
+    target.element.focus();
   }
 
   private getActiveItemIndex() {
@@ -147,80 +148,10 @@ export class KeyboardNavDirective implements OnChanges {
     const current: KeyboardNavItemDirective = items[active];
     const isFavoriteNavigation = current.favorite;
     if (isFavoriteNavigation) {
-      return this._favoriteNavigation(event, { active, items, current });
+      return favoriteNavigation(event, { active, items, current });
     } else {
-      return this._channelsNavigation(event, { active, items, current });
+      return channelsNavigation(event, { active, items, current });
     }
   }
 
-  private _favoriteNavigation(
-    event: KeyboardEvent,
-    element: {
-      active: number;
-      items: KeyboardNavItemDirective[];
-      current: KeyboardNavItemDirective;
-    },
-  ): KeyboardNavItemDirective {
-    const { items, active, current } = element;
-    let target: KeyboardNavItemDirective = current;
-    switch (event.code) {
-      case 'ArrowDown':
-        if (!current.isLast) {
-          target = items[active + 1];
-        }
-        break;
-      case 'ArrowRight':
-        const index = items.findIndex(item => item.isVisibleInView);
-        const numberOfElementsToSkip = current.dirIndex - index;
-        target.channelsMenu(numberOfElementsToSkip);
-        break;
-      case 'ArrowUp':
-        if (current.dirIndex !== 0) {
-          target = items[active - 1];
-        }
-        break;
-    }
-    return target;
-  }
-
-  private _channelsNavigation(
-    event: KeyboardEvent,
-    element: {
-      active: number;
-      items: KeyboardNavItemDirective[];
-      current: KeyboardNavItemDirective;
-    },
-  ): KeyboardNavItemDirective {
-    const { items, active, current } = element;
-    let target: KeyboardNavItemDirective = current;
-    let step: number = 1;
-    switch (event.code) {
-      case 'ArrowDown':
-        step = 2;
-        target = items[active + step];
-        break;
-      case 'ArrowRight':
-        if (current.dirIndex % 2 === 0) {
-          target = items[active + step];
-        }
-        break;
-      case 'ArrowLeft':
-        if (current.dirIndex % 2 !== 0) {
-          target = items[active - step];
-        } else if (current.dirIndex % 2 === 0 && !current.favorite) {
-          const index = items.findIndex(item => item.isVisibleInView);
-          const numberOfElementsToSkip = current.dirIndex / 2 - index / 2;
-          target.favoritesMenu(numberOfElementsToSkip);
-        }
-        break;
-      case 'ArrowUp':
-        step = 2;
-        if (current.dirIndex !== 0 && current.dirIndex !== 1) {
-          target = items[active - step];
-        }
-        break;
-    }
-
-    return target;
-  }
 }

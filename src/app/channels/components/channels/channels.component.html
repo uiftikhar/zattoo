@@ -4,7 +4,7 @@
     #item
     appKeyboardNavItem
     *ngFor="
-      let channel of (channels$ | async);
+      let channel of channels;
       let index = index;
     "
     [channel]="channel"

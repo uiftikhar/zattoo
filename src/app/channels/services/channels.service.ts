@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {BehaviorSubject, from, Observable, Subject} from 'rxjs';
+import { BehaviorSubject, from, Observable, Subject, zip } from 'rxjs';
 import {
   concatMap,
   distinct,
@@ -19,11 +19,28 @@ import { Channel } from '../interfaces/channel';
 export class ChannelsService {
   private API_URL = '/assets';
 
-  _favorites$: Observable<Channel[]>;
   private favoritesSubject$: BehaviorSubject<Channel[]> = new BehaviorSubject<
     Channel[]
   >(null);
   constructor(private readonly http: HttpClient) {}
+
+  abc() {
+    return zip(
+      this.getAvailableHighestQualityChannels(),
+      this.getFavorites(),
+    ).pipe(
+      map(response => {
+        const channels = response[0];
+        const favorites = response[1];
+        channels.forEach(channel => {
+          channel.isFavorite =
+            favorites.filter(favorite => favorite.id === channel.id).length > 0;
+        });
+        // console.log(channels);
+        return channels;
+      }),
+    );
+  }
 
   getAvailableHighestQualityChannels(): Observable<Channel[]> {
     return this.getHighestQualityChannels(`${this.API_URL}/channels.json`).pipe(
@@ -89,20 +106,32 @@ export class ChannelsService {
     if (favorite) {
       return this.addFavorite(channel);
     } else {
-      return this.removeFavorite(channel.id);
+      return this.removeFavorite(channel);
     }
   }
 
   addFavorite(channel: Channel) {
     const currentValue = this.favoritesSubject$.getValue();
-    // TODO: filter for duplicates
-    // TODO: If it is a duplicate, remove it from the list
-    return this.favoritesSubject$.next([...currentValue, channel]);
+    if (!currentValue.find(favorite => favorite.id === channel.id)) {
+      channel.isFavorite = true;
+      return this.favoritesSubject$.next([...currentValue, channel]);
+    } else {
+      const index = currentValue.findIndex(
+        favorite => favorite.id === channel.id,
+      );
+
+      // TODO: Channels behavior subject and read value to pr isFavFalse ?
+      currentValue.splice(index, 1);
+      return this.favoritesSubject$.next([...currentValue]);
+    }
   }
 
-  removeFavorite(id: string) {
+  removeFavorite(channel: Channel) {
     const currentValue = this.favoritesSubject$.getValue();
-    const response = currentValue.filter(_channel => _channel.id !== id);
+    channel.isFavorite = false;
+    const response = currentValue.filter(
+      _channel => _channel.id !== channel.id,
+    );
     return this.favoritesSubject$.next(response);
   }
 }

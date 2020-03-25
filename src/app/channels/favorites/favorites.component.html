@@ -1,6 +1,6 @@
 <h1 class="h1">
   favorite channels<span class="span"
-    >({{ (favorites$ | async)?.length }})</span
+    >({{ favorites?.length }})</span
   >
 </h1>
 <div
@@ -15,7 +15,7 @@
       let index = index;
       last as isLast
     "
-    appKeyboardNavItem="{{ true }}"
+    appKeyboardNavItem
     [isLast]="isLast"
     [dirIndex]="index"
     [channel]="channel"
