@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -7,29 +8,34 @@ import {
   NgZone,
   OnInit,
   Output,
+  QueryList,
   Renderer2,
+  ViewChildren,
 } from '@angular/core';
 import { ChannelsService } from '../services/channels.service';
 import { Channel } from '../interfaces/channel';
 import { Observable } from 'rxjs';
 import { KeyboardNavItemDirective } from '../../shared/directive/keyboard-nav-item.directive';
 import { switchMap } from 'rxjs/operators';
+import { ListItemComponent } from '../../shared/list-item/list-item.component';
 
 @Component({
   selector: 'app-favorites',
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.scss'],
 })
-export class FavoritesComponent implements OnInit {
+export class FavoritesComponent implements OnInit, AfterViewInit {
   constructor(
     private readonly channelsService: ChannelsService,
-    private renderer: Renderer2,
-    private zone: NgZone,
+    private elementRef: ElementRef<HTMLElement>,
   ) {}
   @Input() switchToFavoritesMenu: {
     favoritesMenu: boolean;
     index: number;
   };
+
+  @ViewChildren('item', { read: ElementRef })
+  public items: QueryList<ElementRef>;
 
   @Output() channelsMenu: EventEmitter<{
     channelsMenu: boolean;
@@ -40,7 +46,7 @@ export class FavoritesComponent implements OnInit {
   }>();
 
   loadImages: boolean = false;
-  favorites: Channel[];
+  favorites: Channel[] = [];
   focusNextElementID: string;
 
   setLoadImages() {
@@ -48,9 +54,19 @@ export class FavoritesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.channelsService.getFavorites().subscribe(res => {
+    this.channelsService.favoritesSubject$.subscribe(res => {
       this.favorites = res;
     });
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.items.changes.subscribe(item => {
+        if (this.items && this.items.last) {
+          this.items.last.nativeElement.scrollIntoView();
+        }
+      });
+    }, 500);
   }
 
   goToChannels(event: { channelsMenu: boolean; index: number }) {

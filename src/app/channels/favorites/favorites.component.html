@@ -10,6 +10,7 @@
   [switchToFavoritesMenu]="switchToFavoritesMenu"
 >
   <app-list-item
+    #item
     [favorite]="true"
     *ngFor="
       let channel of favorites;

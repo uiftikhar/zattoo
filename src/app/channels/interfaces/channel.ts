@@ -14,4 +14,5 @@ export interface Channel {
   id: string;
   visibleInView?: boolean;
   isFavorite?: boolean;
+  scrollIntoView?: boolean;
 }

@@ -20,6 +20,7 @@ import { Channel } from '../../interfaces/channel';
 })
 export class ChannelsComponent implements OnInit, AfterViewInit {
   channels: Channel[];
+  favorites: Channel[];
   @Output() favoritesMenu: EventEmitter<{
     favoritesMenu: boolean;
     index: number;

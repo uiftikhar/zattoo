@@ -19,9 +19,9 @@ import { Channel } from '../interfaces/channel';
 export class ChannelsService {
   private API_URL = '/assets';
 
-  private favoritesSubject$: BehaviorSubject<Channel[]> = new BehaviorSubject<
+  favoritesSubject$: BehaviorSubject<Channel[]> = new BehaviorSubject<
     Channel[]
-  >(null);
+  >([]);
 
   private channelsSubject$: BehaviorSubject<Channel[]> = new BehaviorSubject<
     Channel[]
