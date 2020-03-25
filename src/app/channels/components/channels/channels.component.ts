@@ -7,6 +7,7 @@ import {
   OnInit,
   Output,
   QueryList,
+  ViewChild,
   ViewChildren,
 } from '@angular/core';
 import { ChannelsService } from '../../services/channels.service';
@@ -35,7 +36,10 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
   };
 
   @ViewChildren('item', { read: ElementRef })
-  public items: QueryList<ElementRef>;
+  public items: QueryList<ElementRef<HTMLElement>>;
+
+  @ViewChild('itemContainer', { read: ElementRef })
+  public itemsContainer: ElementRef<HTMLElement>;
   constructor(private readonly _channelsService: ChannelsService) {}
   loadImages: boolean = false;
 
@@ -50,7 +54,9 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this._channelsService.getAvailableHighestQualityChannels().subscribe(res => (this.channels = res));
+    this._channelsService
+      .getAvailableHighestQualityChannels()
+      .subscribe(res => (this.channels = res));
   }
 
   goToFavorites(event: { favoritesMenu: boolean; index: number }) {

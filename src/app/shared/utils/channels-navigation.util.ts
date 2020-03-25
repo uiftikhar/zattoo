@@ -17,7 +17,6 @@ export const channelsNavigation = (
       step = 2;
       target = items[active + step];
       break;
-
     case 'ArrowRight':
       if (current.dirIndex % 2 === 0) {
         target = items[active + step];

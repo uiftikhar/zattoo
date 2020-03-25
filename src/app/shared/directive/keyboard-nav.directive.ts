@@ -88,7 +88,11 @@ export class KeyboardNavDirective implements OnChanges {
   private getToFavoritesMenu({ favoritesMenu, index }) {
     const items: KeyboardNavItemDirective[] = this.items.toArray() as KeyboardNavItemDirective[];
     const _index = items.findIndex(item => item.isVisibleInView === true);
-    const target = items && items[_index + index];
+    let redirectIndex = _index + index;
+    if (redirectIndex > items.length - 1) {
+      redirectIndex = items.length - 1;
+    }
+    const target = items && items[redirectIndex];
     if (target) {
       target.element.focus();
     }
@@ -132,10 +136,20 @@ export class KeyboardNavDirective implements OnChanges {
     );
 
     const _index = items.findIndex(item => item.isVisibleInView === true);
-
-    target.element.scrollIntoView({
-      block: 'center',
-    });
+    console.log(_index, target.element.parentElement.scrollTop);
+    // target.element.parentElement.scrollTop = 175;
+    if (target.element.parentElement.scrollTop >= 7000) {
+      target.element.style.position = 'absolute';
+      this._renderer.setProperty(target.element.parentElement, 'top', 200);
+      // target.element.parentElement. = 70;
+    }
+    if (_index > 1) {
+      target.element.parentElement.scrollTop = 70;
+      console.log(123);
+      // target.element.scrollIntoView({
+      //   block: 'center',
+      // });
+    }
     target.element.focus();
   }
 
