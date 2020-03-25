@@ -22,11 +22,15 @@ export class ChannelsService {
   private favoritesSubject$: BehaviorSubject<Channel[]> = new BehaviorSubject<
     Channel[]
   >(null);
+
+  private channelsSubject$: BehaviorSubject<Channel[]> = new BehaviorSubject<
+    Channel[]
+  >(null);
   constructor(private readonly http: HttpClient) {}
 
-  abc() {
+  getAvailableHighestQualityChannels(): Observable<Channel[]> {
     return zip(
-      this.getAvailableHighestQualityChannels(),
+      this._getAvailableHighestQualityChannels(),
       this.getFavorites(),
     ).pipe(
       map(response => {
@@ -36,15 +40,20 @@ export class ChannelsService {
           channel.isFavorite =
             favorites.filter(favorite => favorite.id === channel.id).length > 0;
         });
+        this.channelsSubject$.next(channels);
         // console.log(channels);
-        return channels;
+        return this.channelsSubject$.value;
       }),
     );
   }
 
-  getAvailableHighestQualityChannels(): Observable<Channel[]> {
+  _getAvailableHighestQualityChannels(): Observable<Channel[]> {
     return this.getHighestQualityChannels(`${this.API_URL}/channels.json`).pipe(
       map(this.isAvailable),
+      mergeMap(channels => {
+        this.channelsSubject$.next(channels);
+        return this.channelsSubject$.asObservable();
+      }),
     );
   }
 

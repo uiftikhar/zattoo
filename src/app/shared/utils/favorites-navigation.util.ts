@@ -7,9 +7,13 @@ export const favoriteNavigation = (
     items: KeyboardNavItemDirective[];
     current: KeyboardNavItemDirective;
   },
-): KeyboardNavItemDirective => {
+): {
+  target: KeyboardNavItemDirective;
+  isGoingToChannelsNavigation: boolean;
+} => {
   const { items, active, current } = element;
   let target: KeyboardNavItemDirective = current;
+  let isGoingToChannelsNavigation = false;
   switch (event.code) {
     case 'ArrowDown':
       if (!current.isLast) {
@@ -20,6 +24,7 @@ export const favoriteNavigation = (
       const index = items.findIndex(item => item.isVisibleInView);
       const numberOfElementsToSkip = current.dirIndex - index;
       target.channelsMenu(numberOfElementsToSkip);
+      isGoingToChannelsNavigation = true;
       break;
     case 'ArrowUp':
       if (current.dirIndex !== 0) {
@@ -27,5 +32,8 @@ export const favoriteNavigation = (
       }
       break;
   }
-  return target;
+  return {
+    target,
+    isGoingToChannelsNavigation,
+  };
 };

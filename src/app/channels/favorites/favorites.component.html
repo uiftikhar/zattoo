@@ -6,6 +6,7 @@
 <div
   class="favorites-wrapper"
   appKeyboardNav
+  [focusNext]="focusNextElementID"
   [switchToFavoritesMenu]="switchToFavoritesMenu"
 >
   <app-list-item
@@ -23,6 +24,6 @@
     (goToChannelsMenu)="goToChannels($event)"
     (deferLoad)="loadImages = true"
     [loadImages]="loadImages"
-    (toggleFavorite)="toggleFavorite($event)"
+    (toggleFavorite)="removeFavorite($event)"
   ></app-list-item>
 </div>

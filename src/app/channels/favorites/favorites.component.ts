@@ -1,16 +1,19 @@
 import {
   Component,
+  ElementRef,
   EventEmitter,
   HostListener,
   Input,
+  NgZone,
   OnInit,
   Output,
+  Renderer2,
 } from '@angular/core';
 import { ChannelsService } from '../services/channels.service';
 import { Channel } from '../interfaces/channel';
 import { Observable } from 'rxjs';
 import { KeyboardNavItemDirective } from '../../shared/directive/keyboard-nav-item.directive';
-import {switchMap} from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-favorites',
@@ -18,7 +21,11 @@ import {switchMap} from 'rxjs/operators';
   styleUrls: ['./favorites.component.scss'],
 })
 export class FavoritesComponent implements OnInit {
-  constructor(private readonly channelsService: ChannelsService) {}
+  constructor(
+    private readonly channelsService: ChannelsService,
+    private renderer: Renderer2,
+    private zone: NgZone,
+  ) {}
   @Input() switchToFavoritesMenu: {
     favoritesMenu: boolean;
     index: number;
@@ -34,21 +41,29 @@ export class FavoritesComponent implements OnInit {
 
   loadImages: boolean = false;
   favorites: Channel[];
+  focusNextElementID: string;
 
   setLoadImages() {
     this.loadImages = true;
   }
 
   ngOnInit(): void {
-    this.channelsService.getFavorites().subscribe(res => this.favorites = res);
+    this.channelsService.getFavorites().subscribe(res => {
+      this.favorites = res;
+    });
   }
 
   goToChannels(event: { channelsMenu: boolean; index: number }) {
     this.channelsMenu.emit(event);
   }
 
-  toggleFavorite(event: { channel: Channel; isFavorite: boolean }) {
-    console.log(event.isFavorite);
-    this.channelsService.toggleFavorite(event.channel, false);
+  removeFavorite(event: { channel: Channel; isFavorite: boolean }) {
+    this.focusNextElementID = this.favorites.find(
+      favorites => favorites.id === event.channel.id,
+    ).id;
+    this.channelsService.toggleFavorite(event.channel, event.isFavorite);
+    if (this.favorites.length === 0) {
+      this.goToChannels({ channelsMenu: true, index: 0 });
+    }
   }
 }

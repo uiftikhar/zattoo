@@ -49,7 +49,7 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this._channelsService.abc().subscribe(res => (this.channels = res));
+    this._channelsService.getAvailableHighestQualityChannels().subscribe(res => (this.channels = res));
   }
 
   goToFavorites(event: { favoritesMenu: boolean; index: number }) {
@@ -57,7 +57,6 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
   }
 
   toggleFavorite(event: { channel: Channel; isFavorite: boolean }) {
-    console.log(event.isFavorite);
     this._channelsService.toggleFavorite(event.channel, event.isFavorite);
   }
 }

@@ -1,4 +1,6 @@
 import {
+  AfterContentInit,
+  AfterViewInit,
   ContentChildren,
   Directive,
   HostListener,
@@ -9,8 +11,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { KeyboardNavItemDirective } from './keyboard-nav-item.directive';
-import {favoriteNavigation} from '../utils/favorites-navigation.util';
-import {channelsNavigation} from '../utils/channels-navigation.util';
+import { favoriteNavigation } from '../utils/favorites-navigation.util';
+import { channelsNavigation } from '../utils/channels-navigation.util';
 
 //
 
@@ -19,7 +21,6 @@ import {channelsNavigation} from '../utils/channels-navigation.util';
 })
 export class KeyboardNavDirective implements OnChanges {
   constructor(private _renderer: Renderer2) {}
-
   @Input() switchToFavoritesMenu: {
     favoritesMenu: boolean;
     index: number;
@@ -30,14 +31,16 @@ export class KeyboardNavDirective implements OnChanges {
     index: number;
   };
 
+  @Input() focusNext: number;
+
   /**
    * Keyboard nav items.
    */
   @ContentChildren(KeyboardNavItemDirective, { descendants: true })
   public items: QueryList<KeyboardNavItemDirective>;
 
-  // TODO: favorites focus input and trigger?
   ngOnChanges(changes: SimpleChanges): void {
+    // console.log('directive', changes.focusNext);
     if (
       changes.switchToFavoritesMenu &&
       changes.switchToFavoritesMenu.currentValue
@@ -65,6 +68,20 @@ export class KeyboardNavDirective implements OnChanges {
           changes.switchToChannelsMenu.currentValue.favoritesMenu,
       };
       this.getToChannelsMenu(response);
+    }
+
+    if (changes.focusNext && changes.focusNext.currentValue !== undefined) {
+      this._focusNextElement();
+    }
+  }
+
+  private _focusNextElement() {
+    const items: KeyboardNavItemDirective[] = this.items.toArray() as KeyboardNavItemDirective[];
+    const active: number = this.getActiveItemIndex();
+    if (active + 1 < items.length) {
+      items[active + 1].element.focus();
+    } else if (active - 1 > -1) {
+      items[active - 1].element.focus();
     }
   }
 
@@ -106,20 +123,19 @@ export class KeyboardNavDirective implements OnChanges {
     const items: KeyboardNavItemDirective[] = this.items.toArray() as KeyboardNavItemDirective[];
     const active: number = this.getActiveItemIndex();
 
-    const target = this.getTargetElement(event, {
-      active,
-      items,
-    });
-    const _index = items.findIndex(item => item.isVisibleInView === true);
-    if (event.code === 'ArrowDown') {
+    const { target, isGoingToChannelsNavigation } = this.getTargetElement(
+      event,
+      {
+        active,
+        items,
+      },
+    );
 
-    }
-    if (event.code === 'ArrowUp') {
-      target.element.scrollIntoView({
-        // type ScrollLogicalPosition = "start" | "center" | "end" | "nearest";
-        block: 'nearest',
-      });
-    }
+    const _index = items.findIndex(item => item.isVisibleInView === true);
+
+    target.element.scrollIntoView({
+      block: 'center',
+    });
     target.element.focus();
   }
 
@@ -150,8 +166,11 @@ export class KeyboardNavDirective implements OnChanges {
     if (isFavoriteNavigation) {
       return favoriteNavigation(event, { active, items, current });
     } else {
-      return channelsNavigation(event, { active, items, current });
+      const resp = {
+        target: channelsNavigation(event, { active, items, current }),
+        isGoingToChannelsNavigation: false,
+      };
+      return resp;
     }
   }
-
 }

@@ -1,6 +1,6 @@
 .channels-wrapper {
   height: 650px;
-  overflow: hidden;
+  overflow: scroll;
   display: grid;
   grid-template-columns: [channel-1]371px [channel-2]371px;
   grid-template-rows: repeat(9, minmax(72px, auto));
