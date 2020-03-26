@@ -135,21 +135,6 @@ export class KeyboardNavDirective implements OnChanges {
       },
     );
 
-    const _index = items.findIndex(item => item.isVisibleInView === true);
-    console.log(_index, target.element.parentElement.scrollTop);
-    // target.element.parentElement.scrollTop = 175;
-    if (target.element.parentElement.scrollTop >= 7000) {
-      target.element.style.position = 'absolute';
-      this._renderer.setProperty(target.element.parentElement, 'top', 200);
-      // target.element.parentElement. = 70;
-    }
-    if (_index > 1) {
-      target.element.parentElement.scrollTop = 70;
-      console.log(123);
-      // target.element.scrollIntoView({
-      //   block: 'center',
-      // });
-    }
     target.element.focus();
   }
 
