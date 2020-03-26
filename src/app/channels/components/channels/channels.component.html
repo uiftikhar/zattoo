@@ -1,19 +1,32 @@
 <h1 class="h1">All channels</h1>
 
-  <div class="channels-wrapper" #itemContainer appKeyboardNav [switchToChannelsMenu]="switchToChannelsMenu">
+<!--  <div class="channels-wrapper" #itemContainer appKeyboardNav [switchToChannelsMenu]="switchToChannelsMenu">-->
+<!--    <app-list-item-->
+<!--      #item-->
+<!--      appKeyboardNavItem-->
+<!--      *ngFor="-->
+<!--        let channel of channels;-->
+<!--        let index = index;-->
+<!--      "-->
+<!--      [channel]="channel"-->
+<!--      [dirIndex]="index"-->
+<!--      [index]="index"-->
+<!--      (goToFavorites)="goToFavorites($event)"-->
+<!--      (deferLoad)="setLoadImages()"-->
+<!--      [loadImages]="loadImages"-->
+<!--      (toggleFavorite)="toggleFavorite($event)"-->
+<!--    ></app-list-item>-->
+<!--</div>-->
+
+<cdk-virtual-scroll-viewport itemSize="73" maxBufferPx="1200" minBufferPx="1200" >
+  <div class="channels-wrapper">
     <app-list-item
-      #item
-      appKeyboardNavItem
-      *ngFor="
-        let channel of channels;
-        let index = index;
-      "
-      [channel]="channel"
-      [dirIndex]="index"
-      [index]="index"
-      (goToFavorites)="goToFavorites($event)"
-      (deferLoad)="setLoadImages()"
-      [loadImages]="loadImages"
-      (toggleFavorite)="toggleFavorite($event)"
+        *cdkVirtualFor="
+          let channel of channels;
+          let index = index;
+        "
+        [channel]="channel"
+        [index]="index"
     ></app-list-item>
-</div>
+  </div>
+</cdk-virtual-scroll-viewport>
