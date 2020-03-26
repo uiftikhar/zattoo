@@ -1,0 +1,69 @@
+:host {
+  display: grid;
+  position: sticky;
+}
+
+:host(:focus) {
+  outline: 0.1rem solid rgba(255, 255, 255, 0.8);
+  //outline: 1px dashed red;
+  background-color: #383838;
+  z-index: 1;
+  box-shadow: 0 0 1.5rem 0.5rem rgba(0, 0, 0, 0.6);
+  width: 368px;
+}
+
+.list-item {
+  display: grid;
+  grid-template-columns: 57px auto 121px 64px;
+  align-items: center;
+  height: 71px;
+  line-height: 71px;
+  padding-left: 16px;
+  margin-bottom: 0.1rem;
+  background-color: #232323;
+  box-shadow: 0 0.2rem 0.2rem 0 rgba(0, 0, 0, 0.6);
+  scroll-snap-align: center;
+}
+
+.fa-star,
+.fa-star-o {
+  font-size: 19px;
+  color: #ebebeb;
+  text-align: center;
+}
+
+.channel-number {
+  font-weight: 700;
+  color: #717171;
+  background-color: #1a1a1a;
+  font-size: 20px;
+  border-radius: 0.4rem;
+  text-align: center;
+  margin-left: 12px;
+  min-width: 45px;
+  height: 35px;
+  line-height: 35px;
+}
+
+.image {
+  max-height: 35px;
+  width: 62px;
+  align-items: center;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.channel-title {
+  color: #ebebeb;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+}

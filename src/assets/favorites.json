@@ -1,0 +1,332 @@
+{
+  "channels": [
+    {
+      "display_alias": "itv-2",
+      "sharing": true,
+      "is_radio": false,
+      "title": "ITV 2",
+      "cid": "itv-2",
+      "group_index": 0,
+      "recording": true,
+      "isFavorite": true,
+      "qualities": [
+        {
+          "logo_white_84": "/images/channels/logos/f6419f10df08cc3c0a7d/white/84x48.png",
+          "logo_black_42": "/images/channels/logos/f6419f10df08cc3c0a7d/black/42x24.png",
+          "logo_black_84": "/images/channels/logos/f6419f10df08cc3c0a7d/black/84x48.png",
+          "level": "sd",
+          "stream_types": [
+            "hls",
+            "smooth_playready",
+            "hds",
+            "dash",
+            "dash_playready",
+            "dash_widevine"
+          ],
+          "title": "ITV 2",
+          "logo_white_42": "/images/channels/logos/f6419f10df08cc3c0a7d/white/42x24.png",
+          "availability": "available",
+          "logo_token": "f6419f10df08cc3c0a7d"
+        }
+      ],
+      "recommendations": true,
+      "id": "itv-2"
+    },
+    {
+      "display_alias": "itv-3",
+      "sharing": true,
+      "is_radio": false,
+      "title": "ITV 3",
+      "cid": "itv-3",
+      "group_index": 0,
+      "recording": true,
+      "isFavorite":  true,
+      "qualities": [
+        {
+          "logo_white_84": "/images/channels/logos/b3cc7f6cfce81f137302/white/84x48.png",
+          "logo_black_42": "/images/channels/logos/b3cc7f6cfce81f137302/black/42x24.png",
+          "logo_black_84": "/images/channels/logos/b3cc7f6cfce81f137302/black/84x48.png",
+          "level": "sd",
+          "stream_types": [
+            "hls",
+            "smooth_playready",
+            "hds",
+            "dash",
+            "dash_playready",
+            "dash_widevine"
+          ],
+          "title": "ITV 3",
+          "logo_white_42": "/images/channels/logos/b3cc7f6cfce81f137302/white/42x24.png",
+          "availability": "subscribable",
+          "logo_token": "b3cc7f6cfce81f137302"
+        }
+      ],
+      "recommendations": true,
+      "id": "itv-3"
+    },
+    {
+      "display_alias": "itv-4",
+      "sharing": true,
+      "is_radio": false,
+      "title": "ITV 4",
+      "cid": "itv-4",
+      "group_index": 0,
+      "recording": true,
+      "isFavorite":  true,
+      "qualities": [
+        {
+          "logo_white_84": "/images/channels/logos/eabf59766e77192dba48/white/84x48.png",
+          "logo_black_42": "/images/channels/logos/eabf59766e77192dba48/black/42x24.png",
+          "logo_black_84": "/images/channels/logos/eabf59766e77192dba48/black/84x48.png",
+          "level": "sd",
+          "stream_types": [
+            "hls",
+            "smooth_playready",
+            "hds",
+            "dash",
+            "dash_playready",
+            "dash_widevine"
+          ],
+          "title": "ITV 4",
+          "logo_white_42": "/images/channels/logos/eabf59766e77192dba48/white/42x24.png",
+          "availability": "available",
+          "logo_token": "eabf59766e77192dba48"
+        }
+      ],
+      "recommendations": true,
+      "id": "itv-4"
+    },
+    {
+      "display_alias": "itvbe",
+      "sharing": true,
+      "is_radio": false,
+      "title": "ITVBe",
+      "cid": "itvbe",
+      "group_index": 0,
+      "recording": true,
+      "isFavorite":  true,
+      "qualities": [
+        {
+          "logo_white_84": "/images/channels/logos/bbab3779254889364b14/white/84x48.png",
+          "logo_black_42": "/images/channels/logos/bbab3779254889364b14/black/42x24.png",
+          "logo_black_84": "/images/channels/logos/bbab3779254889364b14/black/84x48.png",
+          "level": "sd",
+          "stream_types": [
+            "hls",
+            "smooth_playready",
+            "hds",
+            "dash",
+            "dash_playready",
+            "dash_widevine"
+          ],
+          "title": "ITVBe",
+          "logo_white_42": "/images/channels/logos/bbab3779254889364b14/white/42x24.png",
+          "availability": "available",
+          "logo_token": "bbab3779254889364b14"
+        }
+      ],
+      "recommendations": true,
+      "id": "itvbe"
+    },
+    {
+      "display_alias": "bbc2",
+      "sharing": true,
+      "is_radio": false,
+      "title": "BBC Two HD",
+      "cid": "bbc2",
+      "group_index": 0,
+      "recording": true,
+      "isFavorite":  true,
+      "qualities": [
+        {
+          "logo_white_84": "/images/channels/logos/63de162fc192e8b60d64/white/84x48.png",
+          "logo_black_42": "/images/channels/logos/63de162fc192e8b60d64/black/42x24.png",
+          "logo_black_84": "/images/channels/logos/63de162fc192e8b60d64/black/84x48.png",
+          "level": "hd",
+          "stream_types": [
+            "hls",
+            "smooth_playready",
+            "hds",
+            "dash",
+            "dash_playready",
+            "dash_widevine"
+          ],
+          "title": "BBC Two HD",
+          "logo_white_42": "/images/channels/logos/63de162fc192e8b60d64/white/42x24.png",
+          "availability": "available",
+          "logo_token": "63de162fc192e8b60d64"
+        },
+        {
+          "logo_white_84": "/images/channels/logos/d1c0f2eb8a31828d80d7/white/84x48.png",
+          "logo_black_42": "/images/channels/logos/d1c0f2eb8a31828d80d7/black/42x24.png",
+          "logo_black_84": "/images/channels/logos/d1c0f2eb8a31828d80d7/black/84x48.png",
+          "level": "sd",
+          "stream_types": [
+            "hls",
+            "smooth_playready",
+            "hds",
+            "dash",
+            "dash_playready",
+            "dash_widevine"
+          ],
+          "title": "BBC Two England",
+          "logo_white_42": "/images/channels/logos/d1c0f2eb8a31828d80d7/white/42x24.png",
+          "availability": "available",
+          "logo_token": "d1c0f2eb8a31828d80d7"
+        }
+      ],
+      "recommendations": true,
+      "id": "bbc2"
+    },
+    {
+      "display_alias": "bbc-four",
+      "sharing": true,
+      "is_radio": false,
+      "title": "BBC Four HD",
+      "cid": "bbc-four",
+      "group_index": 0,
+      "recording": true,
+      "isFavorite":  true,
+      "qualities": [
+        {
+          "logo_white_84": "/images/channels/logos/d2a47198bc1c7a8a5123/white/84x48.png",
+          "logo_black_42": "/images/channels/logos/d2a47198bc1c7a8a5123/black/42x24.png",
+          "logo_black_84": "/images/channels/logos/d2a47198bc1c7a8a5123/black/84x48.png",
+          "level": "hd",
+          "stream_types": [
+            "hls",
+            "smooth_playready",
+            "hds",
+            "dash",
+            "dash_playready",
+            "dash_widevine"
+          ],
+          "title": "BBC Four HD",
+          "logo_white_42": "/images/channels/logos/d2a47198bc1c7a8a5123/white/42x24.png",
+          "availability": "available",
+          "logo_token": "d2a47198bc1c7a8a5123"
+        },
+        {
+          "logo_white_84": "/images/channels/logos/a6997ea6dfaf15793621/white/84x48.png",
+          "logo_black_42": "/images/channels/logos/a6997ea6dfaf15793621/black/42x24.png",
+          "logo_black_84": "/images/channels/logos/a6997ea6dfaf15793621/black/84x48.png",
+          "level": "sd",
+          "stream_types": [
+            "hls",
+            "smooth_playready",
+            "hds",
+            "dash",
+            "dash_playready",
+            "dash_widevine"
+          ],
+          "title": "BBC Four",
+          "logo_white_42": "/images/channels/logos/a6997ea6dfaf15793621/white/42x24.png",
+          "availability": "available",
+          "logo_token": "a6997ea6dfaf15793621"
+        }
+      ],
+      "recommendations": true,
+      "id": "bbc-four"
+    },
+    {
+      "display_alias": "itv-1-london",
+      "sharing": true,
+      "is_radio": false,
+      "title": "ITV 1 HD",
+      "cid": "itv-1-london",
+      "group_index": 0,
+      "recording": true,
+      "isFavorite":  true,
+      "qualities": [
+        {
+          "logo_white_84": "/images/channels/logos/d0fe0d3aebb8f801587d/white/84x48.png",
+          "logo_black_42": "/images/channels/logos/d0fe0d3aebb8f801587d/black/42x24.png",
+          "logo_black_84": "/images/channels/logos/d0fe0d3aebb8f801587d/black/84x48.png",
+          "level": "sd",
+          "stream_types": [
+            "hls",
+            "smooth_playready",
+            "hds",
+            "dash",
+            "dash_playready",
+            "dash_widevine"
+          ],
+          "title": "ITV 1 London",
+          "logo_white_42": "/images/channels/logos/d0fe0d3aebb8f801587d/white/42x24.png",
+          "availability": "available",
+          "logo_token": "d0fe0d3aebb8f801587d"
+        },
+        {
+          "logo_white_84": "/images/channels/logos/388b306901b101d45b46/white/84x48.png",
+          "logo_black_42": "/images/channels/logos/388b306901b101d45b46/black/42x24.png",
+          "logo_black_84": "/images/channels/logos/388b306901b101d45b46/black/84x48.png",
+          "level": "hd",
+          "stream_types": [
+            "hls",
+            "smooth_playready",
+            "hds",
+            "dash",
+            "dash_playready",
+            "dash_widevine"
+          ],
+          "title": "ITV 1 HD",
+          "logo_white_42": "/images/channels/logos/388b306901b101d45b46/white/42x24.png",
+          "availability": "available",
+          "logo_token": "388b306901b101d45b46"
+        }
+      ],
+      "recommendations": true,
+      "id": "itv-1-london"
+    },
+    {
+      "display_alias": "bbc-one",
+      "sharing": true,
+      "is_radio": false,
+      "title": "BBC One HD",
+      "cid": "bbc-one",
+      "group_index": 0,
+      "recording": true,
+      "isFavorite":  true,
+      "qualities": [
+        {
+          "logo_white_84": "/images/channels/logos/88497e7bca67fde6a313/white/84x48.png",
+          "logo_black_42": "/images/channels/logos/88497e7bca67fde6a313/black/42x24.png",
+          "logo_black_84": "/images/channels/logos/88497e7bca67fde6a313/black/84x48.png",
+          "level": "hd",
+          "stream_types": [
+            "hls",
+            "smooth_playready",
+            "hds",
+            "dash",
+            "dash_playready",
+            "dash_widevine"
+          ],
+          "title": "BBC One HD",
+          "logo_white_42": "/images/channels/logos/88497e7bca67fde6a313/white/42x24.png",
+          "availability": "subscribable",
+          "logo_token": "88497e7bca67fde6a313"
+        },
+        {
+          "logo_white_84": "/images/channels/logos/e7db7cde3a9bf2c6e694/white/84x48.png",
+          "logo_black_42": "/images/channels/logos/e7db7cde3a9bf2c6e694/black/42x24.png",
+          "logo_black_84": "/images/channels/logos/e7db7cde3a9bf2c6e694/black/84x48.png",
+          "level": "sd",
+          "stream_types": [
+            "hls",
+            "smooth_playready",
+            "hds",
+            "dash",
+            "dash_playready",
+            "dash_widevine"
+          ],
+          "title": "BBC One England",
+          "logo_white_42": "/images/channels/logos/e7db7cde3a9bf2c6e694/white/42x24.png",
+          "availability": "available",
+          "logo_token": "e7db7cde3a9bf2c6e694"
+        }
+      ],
+      "recommendations": true,
+      "id": "bbc-one"
+    }
+  ]
+}

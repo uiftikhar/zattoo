@@ -3,8 +3,32 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'zattoo';
+  switchToFavoritesMenu: {
+    favoritesMenu: boolean;
+    index: number;
+  };
+
+  switchToChannelsMenu: {
+    channelsMenu: boolean;
+    index: number;
+  };
+
+  isFavoriteMenuEnabled(goToFavMenu: {
+    favoritesMenu: boolean;
+    index: number;
+  }) {
+    this.switchToFavoritesMenu = goToFavMenu;
+    // console.log(this.switchToFavoritesMenu);
+  }
+
+  isChannelsMenuEnabled(goToChannelsMenu: {
+    channelsMenu: boolean;
+    index: number;
+  }) {
+    this.switchToChannelsMenu = goToChannelsMenu;
+
+  }
 }
