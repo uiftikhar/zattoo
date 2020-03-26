@@ -5,10 +5,10 @@
     "types": [
       "jest",
       "node"
-    ],
-    "emitDecoratorMetadata": true
+    ]
   },
   "files": [
+    "test.ts",
     "polyfills.ts"
   ],
   "include": [
