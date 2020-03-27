@@ -14,6 +14,7 @@ import { ChannelsService } from '../../services/channels.service';
 import { Observable } from 'rxjs';
 import { Channel } from '../../interfaces/channel';
 import { VirtualScrollerComponent } from 'ngx-virtual-scroller';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-channels',
@@ -70,6 +71,8 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
     console.log(123);
   }
 
+  @ViewChild(CdkVirtualScrollViewport) viewport: CdkVirtualScrollViewport;
+
   constructor(private readonly _channelsService: ChannelsService) {}
 
   public ngAfterViewInit(): void {
@@ -79,9 +82,13 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
   }
 
   currentIndex(index) {
-    console.log('currentIndex', index);
+    console.log(
+      'currentIndex',
+      index,
+      this.viewport.measureScrollOffset('top'),
+    );
+    // this.viewport.setRenderedContentOffset(400, 'to-end');
   }
-
 
   setLoadImages() {
     this.loadImages = true;

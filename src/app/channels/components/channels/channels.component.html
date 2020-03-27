@@ -28,6 +28,11 @@
         *ngFor="let channel of channels; let index = index"
         [channel]="channel"
         [loadImages]="loadImages"
+        [dirIndex]="index"
+        (goToFavorites)="goToFavorites($event)"
+        (deferLoad)="setLoadImages()"
+        [loadImages]="loadImages"
+        (toggleFavorite)="toggleFavorite($event)"
         (toggleFavorite)="toggleFavorite($event)"
       ></app-list-item>
 </cdk-virtual-scroll-viewport>

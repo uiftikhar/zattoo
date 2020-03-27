@@ -135,9 +135,9 @@ export class KeyboardNavDirective implements OnChanges {
       },
     );
 
-    target.element.scrollIntoView({
-      block: 'center'
-    })
+    // target.element.scrollIntoView({
+    //   block: 'center'
+    // })
     target.element.focus();
   }
 
