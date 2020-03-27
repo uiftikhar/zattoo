@@ -18,14 +18,16 @@
 <!--    ></app-list-item>-->
 <!--</div>-->
 
-<virtual-scroller #scroll [items]="channels">
-  <div class="channels-wrapper">
-    <app-list-item
-      *ngFor="let channel of scroll.viewPortItems; let index = index"
-      [channel]="channel"
-      [index]="index"
-      [loadImages]="loadImages"
-      (toggleFavorite)="toggleFavorite($event)"
-    ></app-list-item>
-  </div>
+<virtual-scroller #scroll [items]="channels" appKeyboardNav>
+  <app-list-item
+    appKeyboardNavItem
+    *ngFor="let channel of scroll.viewPortItems; let index = index"
+    [channel]="channel"
+    [dirIndex]="index"
+    [index]="index"
+    (goToFavorites)="goToFavorites($event)"
+    (deferLoad)="setLoadImages()"
+    [loadImages]="loadImages"
+    (toggleFavorite)="toggleFavorite($event)"
+  ></app-list-item>
 </virtual-scroller>
