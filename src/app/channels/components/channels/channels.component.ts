@@ -73,12 +73,18 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
 
   @ViewChild(CdkVirtualScrollViewport) viewport: CdkVirtualScrollViewport;
 
-  constructor(private readonly _channelsService: ChannelsService) {}
+  constructor(private readonly _channelsService: ChannelsService, private el: ElementRef) {}
 
   public ngAfterViewInit(): void {
     setTimeout(() => {
       // this.items.first.nativeElement.focus();
     }, 500);
+  }
+
+  getABC(): HTMLElement[] {
+    return this.el.nativeElement.getElementsByClassName(
+      'keyboard-navigation-item',
+    );
   }
 
   currentIndex(index) {

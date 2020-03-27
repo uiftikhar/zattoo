@@ -20,11 +20,12 @@
 <cdk-virtual-scroll-viewport
   class="example-viewport"
   itemSize="72"
-  appKeyboardNav
+  appKeyboardNavigation
+  [items]="channels"
   (scrolledIndexChange)="currentIndex($event)">
 
   <app-list-item
-    appKeyboardNavItem
+    appKeyboardNavigationItem
         *ngFor="let channel of channels; let index = index"
         [channel]="channel"
         [loadImages]="loadImages"
