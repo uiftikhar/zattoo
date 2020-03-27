@@ -45,7 +45,7 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
 
   public ngAfterViewInit(): void {
     setTimeout(() => {
-      this.items.first.nativeElement.focus();
+      // this.items.first.nativeElement.focus();
     }, 500);
   }
 

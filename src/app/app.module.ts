@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FavoritesComponent } from './channels/favorites/favorites.component';
 import { KeyboardNavDirective } from './shared/directive/keyboard-nav.directive';
 import { KeyboardNavItemDirective } from './shared/directive/keyboard-nav-item.directive';
+import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { KeyboardNavItemDirective } from './shared/directive/keyboard-nav-item.d
     KeyboardNavDirective,
     KeyboardNavItemDirective,
   ],
-  imports: [BrowserModule, HttpClientModule],
+  imports: [BrowserModule, HttpClientModule, VirtualScrollerModule],
   // TODO: move this into its own module ?
   providers: [ChannelsService],
   bootstrap: [AppComponent],

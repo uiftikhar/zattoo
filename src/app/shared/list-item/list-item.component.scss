@@ -1,6 +1,5 @@
 :host {
-  display: grid;
-  position: sticky;
+  width: 351px;
 }
 
 :host(:focus) {
@@ -13,6 +12,7 @@
 }
 
 .list-item {
+  width: 351px;
   display: grid;
   grid-template-columns: 57px auto 121px 64px;
   align-items: center;
