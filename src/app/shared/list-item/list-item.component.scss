@@ -1,5 +1,4 @@
 :host {
-  width: 351px;
 }
 
 :host(:focus) {
@@ -22,7 +21,6 @@
   margin-bottom: 0.1rem;
   background-color: #232323;
   box-shadow: 0 0.2rem 0.2rem 0 rgba(0, 0, 0, 0.6);
-  scroll-snap-align: center;
 }
 
 .fa-star,

@@ -1,10 +1,11 @@
-virtual-scroller {
+cdk-virtual-scroll-viewport {
   height: 650px;
   width: 800px;
+  overflow-y: hidden !important;
 }
 
 app-list-item {
-    display: inline-block;
-    overflow: hidden;
-    vertical-align: top;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
 }

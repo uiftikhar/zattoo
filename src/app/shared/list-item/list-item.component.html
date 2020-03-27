@@ -1,8 +1,7 @@
 <div class="list-item container">
-  <span class="channel-number">{{ index + 1 | number: '3.0' }}</span>
+  <span class="channel-number">{{ channel.index + 1 | number: '3.0' }}</span>
   <div class="image-container">
     <img
-      *ngIf="loadImages"
       src="https://logos.zattic.com/logos/{{
         channel?.highestQuality?.logo_token
       }}/black/84x48.png"

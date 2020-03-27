@@ -42,11 +42,27 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
   @ViewChild('itemContainer', { read: ElementRef })
   public itemsContainer: ElementRef<HTMLElement>;
 
-  @ViewChild(VirtualScrollerComponent)
+  @ViewChild('scroll')
   private virtualScroll: VirtualScrollerComponent;
 
   // call this function whenever you have to focus on second item
   loadImages: boolean = false;
+
+  onVsUpdate(event) {
+    console.log('vs update', event);
+  }
+
+  onVsChange(event) {
+    console.log('vs change', event);
+  }
+
+  onVsStart(event) {
+    console.log('vs start', event);
+  }
+
+  onVsEnd(event) {
+    console.log('vs end', event);
+  }
 
   focusOnAnItem() {
     this.virtualScroll.items = this.channels;
@@ -61,6 +77,11 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
       // this.items.first.nativeElement.focus();
     }, 500);
   }
+
+  currentIndex(index) {
+    console.log('currentIndex', index);
+  }
+
 
   setLoadImages() {
     this.loadImages = true;

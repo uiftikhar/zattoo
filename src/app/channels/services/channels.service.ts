@@ -100,8 +100,13 @@ export class ChannelsService {
   }
 
   private toResponse(response: { channels: Channel[] }): Channel[] {
-    return response.channels;
+    return response.channels.map((channel, index) => {
+      channel.index = index;
+      return channel;
+    });
   }
+
+
 
   private byId(channel: Channel): string {
     return channel.id;

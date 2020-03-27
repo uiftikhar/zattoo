@@ -10,6 +10,9 @@ import { FavoritesComponent } from './channels/favorites/favorites.component';
 import { KeyboardNavDirective } from './shared/directive/keyboard-nav.directive';
 import { KeyboardNavItemDirective } from './shared/directive/keyboard-nav-item.directive';
 import { VirtualScrollerModule } from 'ngx-virtual-scroller';
+import { KeyboardNavigationItemDirective } from './shared/directive/keyboard-navigation-item.directive';
+import { KeyboardNavigationDirective } from './shared/directive/keyboard-navigation.directive';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -19,8 +22,10 @@ import { VirtualScrollerModule } from 'ngx-virtual-scroller';
     FavoritesComponent,
     KeyboardNavDirective,
     KeyboardNavItemDirective,
+    KeyboardNavigationItemDirective,
+    KeyboardNavigationDirective,
   ],
-  imports: [BrowserModule, HttpClientModule, VirtualScrollerModule],
+  imports: [BrowserModule, HttpClientModule, ScrollingModule /*, VirtualScrollerModule*/],
   // TODO: move this into its own module ?
   providers: [ChannelsService],
   bootstrap: [AppComponent],
