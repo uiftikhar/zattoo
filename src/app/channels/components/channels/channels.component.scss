@@ -1,25 +1,7 @@
 virtual-scroller {
   height: 650px;
   width: 800px;
-  //overflow: hidden;
-  //display: grid;
-  //grid-template-columns: [channel-1]371px [channel-2]371px;
-  //grid-template-rows: repeat(9, minmax(72px, auto));
-  //grid-auto-flow: row;
-  //padding: 0.5px;
-  //scroll-snap-type: y mandatory;
 }
-
-.channels-wrapper {
-  //display: grid;
-  //grid-template-columns: [channel-1]371px [channel-2]371px;
-  //grid-template-rows: repeat(9, minmax(72px, auto));
-  //grid-auto-flow: row;
-  //overflow: visible;
-  //display: flex;
-  //flex-wrap: wrap;
-}
-
 
 app-list-item {
     display: inline-block;

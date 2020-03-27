@@ -13,6 +13,7 @@ import {
 import { ChannelsService } from '../../services/channels.service';
 import { Observable } from 'rxjs';
 import { Channel } from '../../interfaces/channel';
+import { VirtualScrollerComponent } from 'ngx-virtual-scroller';
 
 @Component({
   selector: 'app-channels',
@@ -40,8 +41,20 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
 
   @ViewChild('itemContainer', { read: ElementRef })
   public itemsContainer: ElementRef<HTMLElement>;
-  constructor(private readonly _channelsService: ChannelsService) {}
+
+  @ViewChild(VirtualScrollerComponent)
+  private virtualScroll: VirtualScrollerComponent;
+
+  // call this function whenever you have to focus on second item
   loadImages: boolean = false;
+
+  focusOnAnItem() {
+    this.virtualScroll.items = this.channels;
+    this.virtualScroll.scrollInto(this.channels[1]);
+    console.log(123);
+  }
+
+  constructor(private readonly _channelsService: ChannelsService) {}
 
   public ngAfterViewInit(): void {
     setTimeout(() => {
