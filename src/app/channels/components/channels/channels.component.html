@@ -1,39 +1,36 @@
 <h1 class="h1">All channels</h1>
 
-<!--<virtual-scroller-->
-<!--  #scroll-->
-<!--  [items]="channels"-->
-<!--  (update)="channels = $event"-->
-<!--  appKeyboardNavigation-->
-<!--  [scrollAnimationTime]="0"-->
-<!--  [modifyOverflowStyleOfParentScroll]="false"-->
+<div appKeyboardNav="">
+  <virtual-scroller
+    #scroll
+    [items]="channels"
+  >
+    <app-list-item
+      appKeyboardNavItem
+      *ngFor="let channel of scroll.viewPortItems; let index = index"
+      [dirIndex]="index"
+      (goToFavorites)="goToFavorites($event)"
+      [channel]="channel"
+      [loadImages]="loadImages"
+      (toggleFavorite)="toggleFavorite($event)"
+    ></app-list-item>
+  </virtual-scroller>
+</div>
+
+<!--<cdk-virtual-scroll-viewport-->
+  <!--class="example-viewport"-->
+  <!--itemSize="72"-->
+  <!--appKeyboardNavigation-->
+  <!--[items]="channels"-->
+  <!--(scrolledIndexChange)="currentIndex($event)"-->
 <!--&gt;-->
-<!--  <app-list-item-->
-<!--    appKeyboardNavigationItem-->
-<!--    *ngFor="let channel of scroll.viewPortItems; let index = index"-->
-<!--    [channel]="channel"-->
-<!--    [loadImages]="loadImages"-->
-<!--    (toggleFavorite)="toggleFavorite($event)"-->
-<!--  ></app-list-item>-->
-<!--</virtual-scroller>-->
-
-<cdk-virtual-scroll-viewport
-  class="example-viewport"
-  itemSize="72"
-  appKeyboardNavigation
-  [items]="channels"
-  (scrolledIndexChange)="currentIndex($event)">
-
-  <app-list-item
-    appKeyboardNavigationItem
-        *ngFor="let channel of channels; let index = index"
-        [channel]="channel"
-        [loadImages]="loadImages"
-        [dirIndex]="index"
-        (goToFavorites)="goToFavorites($event)"
-        (deferLoad)="setLoadImages()"
-        [loadImages]="loadImages"
-        (toggleFavorite)="toggleFavorite($event)"
-        (toggleFavorite)="toggleFavorite($event)"
-      ></app-list-item>
-</cdk-virtual-scroll-viewport>
+  <!--<app-list-item-->
+    <!--appKeyboardNavigationItem-->
+    <!--*cdkVirtualFor="let channel of channels"-->
+    <!--[channel]="channel"-->
+    <!--(goToFavorites)="goToFavorites($event)"-->
+    <!--(deferLoad)="setLoadImages()"-->
+    <!--[loadImages]="loadImages"-->
+    <!--(toggleFavorite)="toggleFavorite($event)"-->
+  <!--&gt;</app-list-item>-->
+<!--</cdk-virtual-scroll-viewport>-->

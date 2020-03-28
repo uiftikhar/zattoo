@@ -3,6 +3,7 @@ import {Channel} from '../../channels/interfaces/channel';
 import {KeyboardNavItemDirective} from './keyboard-nav-item.directive';
 import {ListItemComponent} from '../list-item/list-item.component';
 import {CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
+import {VirtualScrollerComponent} from 'ngx-virtual-scroller';
 
 @Directive({
   selector: '[appKeyboardNavigation]',
@@ -14,16 +15,16 @@ export class KeyboardNavigationDirective {
   constructor(private _elementRef: ElementRef) {}
 
 
-  @ViewChild(CdkVirtualScrollViewport)
-  public items2: QueryList<CdkVirtualScrollViewport>;
+  @ContentChildren(VirtualScrollerComponent, { descendants: true })
+  public virtualScroll: QueryList<VirtualScrollerComponent>;
   /**
    * Focus the previous element in the index.
    */
   previous(element) {
-
-    const idx = this.items.findIndex(i => i === element);
+    const items = this.getItems();
+    const idx = items.findIndex(i => i === element);
     if (idx - 1 >= 0) {
-      this.items[idx - 1][this.keyboardNavigationType]();
+      items[idx - 1][this.keyboardNavigationType]();
     }
   }
 
@@ -31,10 +32,10 @@ export class KeyboardNavigationDirective {
    * Focus the next element in the index.
    */
   next(element) {
-    console.log(this.items2);
-    const idx = this.items.findIndex(i => i === element);
-    if (idx + 1 < this.items.length) {
-      this.items[idx + 1][this.keyboardNavigationType]();
+    const items = this.getItems();
+    const idx = items.findIndex(i => i === element);
+    if (idx + 1 < items.length) {
+      items[idx + 1][this.keyboardNavigationType]();
     }
   }
 

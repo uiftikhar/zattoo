@@ -46,38 +46,23 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
   @ViewChild('scroll')
   private virtualScroll: VirtualScrollerComponent;
 
+
   // call this function whenever you have to focus on second item
   loadImages: boolean = false;
 
-  onVsUpdate(event) {
-    console.log('vs update', event);
-  }
 
-  onVsChange(event) {
-    console.log('vs change', event);
-  }
-
-  onVsStart(event) {
-    console.log('vs start', event);
-  }
-
-  onVsEnd(event) {
-    console.log('vs end', event);
-  }
-
-  focusOnAnItem() {
-    this.virtualScroll.items = this.channels;
-    this.virtualScroll.scrollInto(this.channels[1]);
-    console.log(123);
-  }
-
-  @ViewChild(CdkVirtualScrollViewport) viewport: CdkVirtualScrollViewport;
-
-  constructor(private readonly _channelsService: ChannelsService, private el: ElementRef) {}
+  constructor(
+    private readonly _channelsService: ChannelsService,
+    private el: ElementRef,
+  ) {}
 
   public ngAfterViewInit(): void {
+
+    this.virtualScroll.scrollAnimationTime = 0;
+    this.virtualScroll.modifyOverflowStyleOfParentScroll = false;
     setTimeout(() => {
       // this.items.first.nativeElement.focus();
+
     }, 500);
   }
 
@@ -88,11 +73,12 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
   }
 
   currentIndex(index) {
-    console.log(
-      'currentIndex',
-      index,
-      this.viewport.measureScrollOffset('top'),
-    );
+    // console.log(
+    //   'currentIndex',
+    //   index,
+    //   this.viewport.measureScrollOffset('top'),
+    // );
+    // this.viewport.scrollToIndex(index);
     // this.viewport.setRenderedContentOffset(400, 'to-end');
   }
 
@@ -103,7 +89,10 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this._channelsService
       .getAvailableHighestQualityChannels()
-      .subscribe(res => (this.channels = res));
+      .subscribe(res => {
+        this.channels = res;
+        console.log(res);
+      });
   }
 
   goToFavorites(event: { favoritesMenu: boolean; index: number }) {

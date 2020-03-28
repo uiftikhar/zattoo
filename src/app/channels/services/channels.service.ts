@@ -50,6 +50,7 @@ export class ChannelsService {
   _getAvailableHighestQualityChannels(): Observable<Channel[]> {
     return this.getHighestQualityChannels(`${this.API_URL}/channels.json`).pipe(
       map(this.isAvailable),
+      map(this.addIndex),
       mergeMap(channels => {
         this.channelsSubject$.next(channels);
         return this.channelsSubject$.asObservable();
@@ -62,6 +63,7 @@ export class ChannelsService {
       `${this.API_URL}/favorites.json`,
     ).pipe(
       map(this.isAvailable),
+      map(this.addIndex),
       mergeMap(favorites => {
         this.favoritesSubject$.next(favorites);
         return this.favoritesSubject$.asObservable();
@@ -100,13 +102,16 @@ export class ChannelsService {
   }
 
   private toResponse(response: { channels: Channel[] }): Channel[] {
-    return response.channels.map((channel, index) => {
+    return response.channels;
+  }
+
+  private addIndex(channels: Channel[]): Channel[] {
+    console.log(channels);
+    return channels.map((channel, index) => {
       channel.index = index;
       return channel;
     });
   }
-
-
 
   private byId(channel: Channel): string {
     return channel.id;

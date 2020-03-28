@@ -25,7 +25,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     KeyboardNavigationItemDirective,
     KeyboardNavigationDirective,
   ],
-  imports: [BrowserModule, HttpClientModule, ScrollingModule /*, VirtualScrollerModule*/],
+  imports: [BrowserModule, HttpClientModule/*, ScrollingModule */, VirtualScrollerModule],
   // TODO: move this into its own module ?
   providers: [ChannelsService],
   bootstrap: [AppComponent],

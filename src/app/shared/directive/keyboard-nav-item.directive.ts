@@ -35,7 +35,7 @@ export class KeyboardNavItemDirective implements AfterViewInit, OnDestroy {
 
   @Output() public deferLoad: EventEmitter<any> = new EventEmitter();
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef<HTMLElement>) {}
 
   /**
    * Host native element.

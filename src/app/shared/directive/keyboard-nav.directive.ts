@@ -1,6 +1,7 @@
 import {
   AfterContentInit,
   AfterViewInit,
+  ContentChild,
   ContentChildren,
   Directive,
   HostListener,
@@ -9,10 +10,12 @@ import {
   QueryList,
   Renderer2,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { KeyboardNavItemDirective } from './keyboard-nav-item.directive';
 import { favoriteNavigation } from '../utils/favorites-navigation.util';
 import { channelsNavigation } from '../utils/channels-navigation.util';
+import { VirtualScrollerComponent } from 'ngx-virtual-scroller';
 
 //
 
@@ -20,7 +23,6 @@ import { channelsNavigation } from '../utils/channels-navigation.util';
   selector: '[appKeyboardNav]',
 })
 export class KeyboardNavDirective implements OnChanges {
-  constructor(private _renderer: Renderer2) {}
   @Input() switchToFavoritesMenu: {
     favoritesMenu: boolean;
     index: number;
@@ -38,6 +40,9 @@ export class KeyboardNavDirective implements OnChanges {
    */
   @ContentChildren(KeyboardNavItemDirective, { descendants: true })
   public items: QueryList<KeyboardNavItemDirective>;
+
+  @ContentChild(VirtualScrollerComponent)
+  public virtualScroll: VirtualScrollerComponent;
 
   ngOnChanges(changes: SimpleChanges): void {
     // console.log('directive', changes.focusNext);
@@ -135,10 +140,11 @@ export class KeyboardNavDirective implements OnChanges {
       },
     );
 
-    // target.element.scrollIntoView({
-    //   block: 'center'
-    // })
-    target.element.focus();
+    // target.element['focus']()
+    // this.virtualScroll.scrollAnimationTime = 0;
+    // this.virtualScroll.scrollToIndex(active + 2);
+    console.log(this.virtualScroll.items);
+    this.virtualScroll.scrollInto(target, false);
   }
 
   private getActiveItemIndex() {
@@ -165,6 +171,7 @@ export class KeyboardNavDirective implements OnChanges {
     const { items, active } = element;
     const current: KeyboardNavItemDirective = items[active];
     const isFavoriteNavigation = current.favorite;
+    const isFavoriteNavigation2 = current;
     if (isFavoriteNavigation) {
       return favoriteNavigation(event, { active, items, current });
     } else {
