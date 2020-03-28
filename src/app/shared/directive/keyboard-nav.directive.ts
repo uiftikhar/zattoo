@@ -143,8 +143,14 @@ export class KeyboardNavDirective implements OnChanges {
     // target.element['focus']()
     // this.virtualScroll.scrollAnimationTime = 0;
     // this.virtualScroll.scrollToIndex(active + 2);
-    console.log(this.virtualScroll.items);
-    this.virtualScroll.scrollInto(target, false);
+    // this.virtualScroll.vsChange.subscribe(res => console.log(res));
+    this.virtualScroll.scrollInto(
+      this.virtualScroll.items[target.dirIndex],
+      true,
+      -216,
+      0,
+    );
+    target.element.focus();
   }
 
   private getActiveItemIndex() {

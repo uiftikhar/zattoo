@@ -59,8 +59,8 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
   public ngAfterViewInit(): void {
 
     this.virtualScroll.scrollAnimationTime = 0;
-    this.virtualScroll.modifyOverflowStyleOfParentScroll = false;
     setTimeout(() => {
+    console.log(this.virtualScroll);
       // this.items.first.nativeElement.focus();
 
     }, 500);
@@ -91,7 +91,6 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
       .getAvailableHighestQualityChannels()
       .subscribe(res => {
         this.channels = res;
-        console.log(res);
       });
   }
 

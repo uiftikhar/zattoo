@@ -106,7 +106,6 @@ export class ChannelsService {
   }
 
   private addIndex(channels: Channel[]): Channel[] {
-    console.log(channels);
     return channels.map((channel, index) => {
       channel.index = index;
       return channel;

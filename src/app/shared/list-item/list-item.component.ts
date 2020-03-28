@@ -32,7 +32,7 @@ export class ListItemComponent implements OnChanges {
     isFavorite: boolean;
   }>();
 
-  constructor(private elementRef: ElementRef<HTMLElement>) {}
+  constructor(public elementRef: ElementRef<HTMLElement>) {}
   @HostListener('keydown.Enter', ['$event'])
   private toggleFavorites(): void {
     this.toggleFavorite.emit({
@@ -45,5 +45,9 @@ export class ListItemComponent implements OnChanges {
     if (changes.scrollIntoView) {
       console.log(this.elementRef.nativeElement);
     }
+  }
+
+  element() {
+    return this.elementRef.nativeElement;
   }
 }
