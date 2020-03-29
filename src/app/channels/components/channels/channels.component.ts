@@ -72,6 +72,9 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
     );
   }
 
+  abc(event) {
+    console.log(event);
+  }
   currentIndex(index) {
     // console.log(
     //   'currentIndex',

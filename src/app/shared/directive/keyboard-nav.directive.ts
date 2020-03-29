@@ -22,7 +22,7 @@ import { VirtualScrollerComponent } from 'ngx-virtual-scroller';
 @Directive({
   selector: '[appKeyboardNav]',
 })
-export class KeyboardNavDirective implements OnChanges {
+export class KeyboardNavDirective implements OnChanges, AfterContentInit {
   @Input() switchToFavoritesMenu: {
     favoritesMenu: boolean;
     index: number;
@@ -43,6 +43,14 @@ export class KeyboardNavDirective implements OnChanges {
 
   @ContentChild(VirtualScrollerComponent)
   public virtualScroll: VirtualScrollerComponent;
+
+
+  ngAfterContentInit() {
+
+    setTimeout(() => {
+console.log(this.virtualScroll);
+    }, 500);
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     // console.log('directive', changes.focusNext);
@@ -143,11 +151,11 @@ export class KeyboardNavDirective implements OnChanges {
     // target.element['focus']()
     // this.virtualScroll.scrollAnimationTime = 0;
     // this.virtualScroll.scrollToIndex(active + 2);
-    // this.virtualScroll.vsChange.subscribe(res => console.log(res));
+    this.virtualScroll.vsStart.subscribe(res => console.log(res));
     this.virtualScroll.scrollInto(
       this.virtualScroll.items[target.dirIndex],
       true,
-      -216,
+      0,
       0,
     );
     target.element.focus();
